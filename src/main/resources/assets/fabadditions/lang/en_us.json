@@ -1,0 +1,7 @@
+{
+  "global.fabadditions.tooltip": "Hold [Shift]",
+
+  "item.fabadditions.mirror_shard": "Mirror Shard",
+  "item.fabadditions.amethyst_mirror": "Amethyst Mirror",
+  "item.fabadditions.amethyst_mirror.tooltip": "Teleports you back to your respawn location"
+}
