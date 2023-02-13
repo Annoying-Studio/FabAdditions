@@ -1,5 +1,7 @@
 {
   "global.fabadditions.tooltip": "Hold [Shift]",
+  "global.fabadditions.no_respawn": "No respawn-point set!",
+  "global.fabadditions.config_disabled": "Item disabled by config!",
 
   "item.fabadditions.mirror_shard": "Mirror Shard",
   "item.fabadditions.amethyst_mirror": "Amethyst Mirror",

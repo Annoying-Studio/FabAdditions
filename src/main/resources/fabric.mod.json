@@ -6,14 +6,14 @@
   "name": "Fab Additions",
   "description": "A Minecraft vanilla+ mod for Fabric",
   "authors": [
-    "Me!"
+    "Brzzzn"
   ],
   "contact": {
     "homepage": "https://twitter.com/Brzzzn",
     "sources": "https://github.com/Brzzzn/FabAdditions"
   },
 
-  "license": "MIT License",
+  "license": "MIT",
   "icon": "assets/fabadditions/icon.png",
 
   "environment": "*",
@@ -28,9 +28,9 @@
 
   "depends": {
     "fabricloader": ">=0.14.14",
-    "fabric-api": "*",
     "minecraft": "~1.19.2",
-    "java": ">=17"
+    "java": ">=17",
+    "fabric-api": "*"
   },
   "suggests": {
     "another-mod": "*"

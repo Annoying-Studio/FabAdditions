@@ -1,0 +1,9 @@
+{
+  "global.fabadditions.tooltip": "Halte [Shift]",
+  "global.fabadditions.no_respawn": "Kein Wiedereinstigspunkt gesetzt!",
+  "global.fabadditions.config_disabled": "Item wurde durch die Config aussgeschaltet!",
+
+  "item.fabadditions.mirror_shard": "Spiegelscherbe",
+  "item.fabadditions.amethyst_mirror": "Amethyst Spiegel",
+  "item.fabadditions.amethyst_mirror.tooltip": "Teleportiert dich zu deinem Wiedereinstiegspunkt"
+}
