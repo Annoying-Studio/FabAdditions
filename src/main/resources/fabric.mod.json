@@ -3,8 +3,8 @@
   "id": "fabadditions",
   "version": "${version}",
 
-  "name": "Fab Additions",
-  "description": "A Minecraft vanilla+ mod for Fabric",
+  "name": "Fab's Additions",
+  "description": "Fab's Additions is a Vanilla+ Mod for Fabric. Adding new useful items and decorations.",
   "authors": [
     "Brzzzn"
   ],

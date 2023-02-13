@@ -1,19 +1,22 @@
-# Fab Additions
-A Minecraft vanilla+ mod for the Fabric mod loader
+# Fab's Additions
 
-### Features:
-- Amethyst Mirror: teleports you back to your respawn location
-- Config file for disabling or changing parts of the mod
-- and more!
+---
 
-### FAQ
-- Can I include this in my Modpack?
-    - Of course!
-- Forge Port?
-    - Probably not. I don't have enough time maintaining 2 versions of the mod, and I'm not familiar enough with the Forge API
-- Can you backport to X Version?
-    - No, I will mainly focus on the recent versions of Minecraft.
-- Can you add X Item?
-    - While I'm not actively looking for requests, you can reach out to me on Twitter.
-- Is this mod compatible with x?
-    - I don't know, haven't tested it. I will add a list of incompatible mods if problems come to my attention.
+Fab's Additions is a Vanilla+ Mod for Fabric. Adding new useful items and decorations.
+Originally made for a 1.19.2 server with friends, now publicly available.
+
+## Requirements
+
+---
+
+### Fabric
+<p><a href="https://modrinth.com/mod/fabric-api"><img src="https://i.imgur.com/Ol1Tcf8.png" width="156"></a></p>
+
+### Quilt
+- <a href="https://modrinth.com/mod/qsl">Quilted Fabric API</a>
+
+## Download
+
+---
+
+- <a href="https://modrinth.com/mod/fab-additions">Modrinth Download</a>
