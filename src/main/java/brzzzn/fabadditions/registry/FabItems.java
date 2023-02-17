@@ -10,12 +10,8 @@ import net.minecraft.util.registry.Registry;
 
 public class FabItems
 {
-    public static final Item MIRROR_SHARD = registerItem("mirror_shard",
-            new Item((new FabricItemSettings().group(ItemGroup.MISC))));
-
     public static final Item AMETHYST_MIRROR = registerItem("amethyst_mirror",
             new AmethystMirror((new FabricItemSettings().group(ItemGroup.TOOLS)).maxCount(1)));
-
 
     private static Item registerItem(String name, Item item)
     {

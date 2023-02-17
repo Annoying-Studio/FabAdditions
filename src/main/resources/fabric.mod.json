@@ -20,6 +20,9 @@
   "entrypoints": {
     "main": [
       "brzzzn.fabadditions.FabAdditions"
+    ],
+    "client": [
+      "brzzzn.fabadditions.FabAdditionsClient"
     ]
   },
   "mixins": [

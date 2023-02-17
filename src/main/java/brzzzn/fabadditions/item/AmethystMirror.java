@@ -2,6 +2,8 @@ package brzzzn.fabadditions.item;
 
 import net.fabricmc.fabric.api.dimension.v1.FabricDimensions;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.Item;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
@@ -35,7 +37,7 @@ public class AmethystMirror extends Item
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand)
     {
-        if(!world.isClient && hand == Hand.MAIN_HAND)
+        if(!world.isClient && hand == Hand.MAIN_HAND && !user.isSneaking())
         {
             if(mirrors_enabled)
             {
@@ -58,6 +60,7 @@ public class AmethystMirror extends Item
 
                     world.playSound((PlayerEntity)null, user.getX(), user.getY(), user.getZ(),
                             SoundEvents.ITEM_CHORUS_FRUIT_TELEPORT, SoundCategory.PLAYERS, 0.5F, 1F);
+                    serverPlayer.addStatusEffect(new StatusEffectInstance(StatusEffects.BLINDNESS, 30));
                 }
             }
             else

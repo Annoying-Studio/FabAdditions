@@ -1,19 +1,19 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "E#E",
-    "#W#",
-    "E#E"
+    "EGE",
+    "G#G",
+    "EGE"
   ],
   "key":
   {
     "#":
     {
-      "item": "minecraft:amethyst_shard"
+      "item": "minecraft:amethyst_block"
     },
-    "W":
+    "G":
     {
-      "item": "fabadditions:mirror_shard"
+      "item": "minecraft:glass"
     },
     "E":
     {

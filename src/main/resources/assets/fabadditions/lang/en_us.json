@@ -3,7 +3,6 @@
   "global.fabadditions.no_respawn": "No respawn-point set!",
   "global.fabadditions.config_disabled": "Item disabled by config!",
 
-  "item.fabadditions.mirror_shard": "Mirror Shard",
   "item.fabadditions.amethyst_mirror": "Amethyst Mirror",
   "item.fabadditions.amethyst_mirror.tooltip": "Teleports you back to your respawn location"
 }

@@ -1,5 +1,6 @@
 package brzzzn.fabadditions;
 
+import brzzzn.fabadditions.registry.FabBlocks;
 import brzzzn.fabadditions.registry.FabItems;
 import net.fabricmc.api.ModInitializer;
 import org.slf4j.Logger;
@@ -15,5 +16,6 @@ public class FabAdditions implements ModInitializer {
 	public void onInitialize()
 	{
 		FabItems.registerModItems();
+		FabBlocks.registerModBlocks();
 	}
 }
