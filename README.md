@@ -5,11 +5,9 @@ Originally made for a 1.19.2 server with friends, now publicly available.
 
 # Requirements
 
-### Fabric
 <p><a href="https://modrinth.com/mod/fabric-api"><img src="https://i.imgur.com/Ol1Tcf8.png" width="156"></a></p>
 
-### Quilt
-- <a href="https://modrinth.com/mod/qsl">Quilted Fabric API</a>
+<p><a href="https://modrinth.com/mod/fabric-language-kotlin"><img src="https://i.imgur.com/c1DH9VL.png" width="156"></a></p>
 
 # Download
 
