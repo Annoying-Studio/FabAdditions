@@ -1,7 +1,7 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "EGE",
+    "EfE",
     "G#G",
     "EGE"
   ],
@@ -18,10 +18,13 @@
     "E":
     {
       "item": "minecraft:echo_shard"
+    },
+    "F": {
+      "item": "minecraft:feather"
     }
   },
   "result":
   {
-    "item": "fabadditions:amethyst_mirror"
+    "item": "fabadditions:amethyst_feather"
   }
 }

@@ -21,7 +21,7 @@ import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
 import java.util.*
 
-open class AmethystMirror(settings: Settings?) : Item(settings) {
+open class AmethystFeather(settings: Settings?) : Item(settings) {
     var mirrors_enabled = true //placeholder
     var isInterdimensional = false
     override fun use(world: World, user: PlayerEntity, hand: Hand): TypedActionResult<ItemStack> {

@@ -9,7 +9,7 @@
   {
     "#":
     {
-      "item": "fabadditions:amethyst_mirror"
+      "item": "fabadditions:amethyst_feather"
     },
     "G":
     {
@@ -22,6 +22,6 @@
   },
   "result":
   {
-    "item": "fabadditions:interdimensional_mirror"
+    "item": "fabadditions:interdimensional_feather"
   }
 }

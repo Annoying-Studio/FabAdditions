@@ -7,7 +7,7 @@ import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 import net.minecraft.world.World
 
-class InterdimensionalMirror(settings: Settings?) : AmethystMirror(settings) {
+class InterdimensionalFeather(settings: Settings?) : AmethystFeather(settings) {
     init {
         isInterdimensional = true
     }
