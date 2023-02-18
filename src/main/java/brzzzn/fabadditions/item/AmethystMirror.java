@@ -1,7 +1,10 @@
 package brzzzn.fabadditions.item;
 
-import net.fabricmc.fabric.api.dimension.v1.FabricDimensions;
+import net.minecraft.block.BedBlock;
+import net.minecraft.block.Block;
+import net.minecraft.block.RespawnAnchorBlock;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.Item;
@@ -18,20 +21,20 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.TeleportTarget;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.Optional;
 
 public class AmethystMirror extends Item
 {
     boolean mirrors_enabled = true; //placeholder
+    boolean isInterdimensional = false;
 
     public AmethystMirror(Settings settings)
     {
         super(settings);
-
     }
 
     @Override
@@ -41,26 +44,49 @@ public class AmethystMirror extends Item
         {
             if(mirrors_enabled)
             {
-                ServerWorld serverWorld = ((ServerWorld) world).getServer().getWorld(World.OVERWORLD);
                 ServerPlayerEntity serverPlayer = (ServerPlayerEntity) user;
+                ServerWorld targetWorld = serverPlayer.server.getWorld(serverPlayer.getSpawnPointDimension());
 
-                if(serverPlayer.getSpawnPointPosition()==null)
+                BlockPos spawnPos = serverPlayer.getSpawnPointPosition();
+
+                if (spawnPos != null)
                 {
-                    user.sendMessage(Text.translatable("global.fabadditions.no_respawn").formatted(Formatting.RED));
+                    Block respawnBlock = targetWorld.getBlockState(spawnPos).getBlock();
+                    Optional<Vec3d> respawnPos = Optional.empty();
+
+                    if (respawnBlock instanceof RespawnAnchorBlock)
+                    {
+                        respawnPos = RespawnAnchorBlock.findRespawnPosition(EntityType.PLAYER, targetWorld, spawnPos);
+
+                    } else if (respawnBlock instanceof BedBlock) {
+                        respawnPos = BedBlock.findWakeUpPosition(EntityType.PLAYER, targetWorld, spawnPos, serverPlayer.getSpawnAngle());
+                    }
+
+                    if(respawnPos.isPresent())
+                    {
+                        //teleport
+                        if (!isInterdimensional && serverPlayer.getWorld() != targetWorld)
+                        {
+                            user.sendMessage(Text.translatable("global.fabadditions.wrong_dimension").formatted(Formatting.RED));
+                        }
+                        else
+                        {
+                            Vec3d spawnVec = respawnPos.get();
+                            serverPlayer.teleport(targetWorld, spawnVec.getX(), spawnVec.getY(), spawnVec.getZ(), serverPlayer.getSpawnAngle(), 0.5F);
+
+                            //effects
+                            serverPlayer.addStatusEffect(new StatusEffectInstance(StatusEffects.BLINDNESS, 30));
+                            targetWorld.playSound(null, spawnPos, SoundEvents.ITEM_CHORUS_FRUIT_TELEPORT, SoundCategory.PLAYERS, 0.5f, 1f);
+                        }
+                    }
+                    else
+                    {
+                        user.sendMessage(Text.translatable("global.fabadditions.no_respawn").formatted(Formatting.RED));
+                    }
                 }
                 else
                 {
-                    BlockPos bedPos = serverPlayer.getSpawnPointPosition();
-
-                    serverPlayer.stopRiding();
-
-                    TeleportTarget target = new TeleportTarget(new Vec3d(bedPos.getX() + 0.5F, bedPos.getY(), bedPos.getZ() + 0.5F),
-                            new Vec3d(0, 0, 0), serverPlayer.getYaw(), serverPlayer.getPitch());
-                    teleport(serverPlayer, serverWorld, target);
-
-                    world.playSound((PlayerEntity)null, user.getX(), user.getY(), user.getZ(),
-                            SoundEvents.ITEM_CHORUS_FRUIT_TELEPORT, SoundCategory.PLAYERS, 0.5F, 1F);
-                    serverPlayer.addStatusEffect(new StatusEffectInstance(StatusEffects.BLINDNESS, 30));
+                    user.sendMessage(Text.translatable("global.fabadditions.no_respawn").formatted(Formatting.RED));
                 }
             }
             else
@@ -72,18 +98,6 @@ public class AmethystMirror extends Item
         }
 
         return super.use(world, user, hand);
-    }
-
-    private void teleport(ServerPlayerEntity serverPlayer, ServerWorld servWorld, TeleportTarget tpTarget)
-    {
-        if(serverPlayer.world.getRegistryKey().equals(servWorld.getRegistryKey()))
-        {
-            serverPlayer.networkHandler.requestTeleport(tpTarget.position.getX(), tpTarget.position.getY(), tpTarget.position.getZ(), tpTarget.yaw, tpTarget.pitch);
-        }
-        else
-        {
-            FabricDimensions.teleport(serverPlayer, servWorld, tpTarget);
-        }
     }
 
     @Override

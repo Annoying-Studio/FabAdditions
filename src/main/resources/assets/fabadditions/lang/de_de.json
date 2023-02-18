@@ -1,11 +1,15 @@
 {
   "global.fabadditions.tooltip": "Halte [Shift]",
-  "global.fabadditions.no_respawn": "Kein Wiedereinstigspunkt gesetzt!",
+  "global.fabadditions.no_respawn": "Kein Einstigspunkt gesetzt!",
   "global.fabadditions.config_disabled": "Item wurde durch die Config aussgeschaltet!",
+  "global.fabadditions.wrong_dimension": "Dein Einstiegspunkt ist in einer anderen Dimension!",
 
   "item.fabadditions.amethyst_mirror": "Amethyst Spiegel",
-  "item.fabadditions.amethyst_mirror.tooltip": "Teleportiert dich zu deinem Wiedereinstiegspunkt",
+  "item.fabadditions.amethyst_mirror.tooltip": "Teleportiert dich zu deinem Einstiegspunkt.",
 
-  "block.fabadditions.encased_glowstone": "Versiegelter Leuchstein",
-  "block.fabadditions.encased_sea_lantern": "Versiegelte Seelaterne"
+  "item.fabadditions.interdimensional_mirror": "Interdimensionaler Spiegel",
+  "item.fabadditions.interdimensional_mirror.tooltip": "Teleportiert dich zu deinem Einstiegspunkt.",
+
+  "item.fabadditions.kiln": "Töpfer Ofen",
+  "item.fabadditions.kiln.tooltip": "Für Ziegelstein, Glass und Terrakotta."
 }
