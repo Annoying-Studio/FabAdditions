@@ -4,11 +4,11 @@
   "global.fabadditions.config_disabled": "Item wurde durch die Config aussgeschaltet!",
   "global.fabadditions.wrong_dimension": "Dein Einstiegspunkt ist in einer anderen Dimension!",
 
-  "item.fabadditions.amethyst_mirror": "Amethyst Spiegel",
-  "item.fabadditions.amethyst_mirror.tooltip": "Teleportiert dich zu deinem Einstiegspunkt.",
+  "item.fabadditions.amethyst_feather": "Amethyst Feder",
+  "item.fabadditions.amethyst_feather.tooltip": "Teleportiert dich zu deinem Einstiegspunkt.",
 
-  "item.fabadditions.interdimensional_mirror": "Interdimensionaler Spiegel",
-  "item.fabadditions.interdimensional_mirror.tooltip": "Teleportiert dich zu deinem Einstiegspunkt.",
+  "item.fabadditions.interdimensional_feather": "Interdimensionale Feder",
+  "item.fabadditions.interdimensional_feather.tooltip": "Teleportiert dich zu deinem Einstiegspunkt.",
 
   "item.fabadditions.kiln": "Töpfer Ofen",
   "item.fabadditions.kiln.tooltip": "Für Ziegelstein, Glass und Terrakotta."

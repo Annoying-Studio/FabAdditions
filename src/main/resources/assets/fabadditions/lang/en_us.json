@@ -4,11 +4,11 @@
   "global.fabadditions.config_disabled": "Item disabled by config!",
   "global.fabadditions.wrong_dimension": "The respawn location you are trying to access is in another dimension!",
 
-  "item.fabadditions.amethyst_mirror": "Amethyst Mirror",
-  "item.fabadditions.amethyst_mirror.tooltip": "Teleports you back to your respawn location.",
+  "item.fabadditions.amethyst_feather": "Amethyst Mirror",
+  "item.fabadditions.amethyst_feather.tooltip": "Teleports you back to your respawn location.",
 
-  "item.fabadditions.interdimensional_mirror": "Interdimensional Mirror",
-  "item.fabadditions.interdimensional_mirror.tooltip": "Teleports you back to your respawn location across dimensions.",
+  "item.fabadditions.interdimensional_feather": "Interdimensional Mirror",
+  "item.fabadditions.interdimensional_feather.tooltip": "Teleports you back to your respawn location across dimensions.",
 
   "item.fabadditions.kiln": "Pottery Kiln",
   "item.fabadditions.kiln.tooltip": "For Bricks, Glass and Terracotta"

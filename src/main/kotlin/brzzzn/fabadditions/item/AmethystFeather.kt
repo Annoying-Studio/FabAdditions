@@ -66,7 +66,7 @@ open class AmethystFeather(settings: Settings?) : Item(settings) {
 
     override fun appendTooltip(stack: ItemStack, world: World?, tooltip: MutableList<Text>, context: TooltipContext) {
         if (Screen.hasShiftDown()) {
-            tooltip.add(Text.translatable("item.fabadditions.amethyst_mirror.tooltip").formatted(Formatting.GRAY))
+            tooltip.add(Text.translatable("item.fabadditions.amethyst_feather.tooltip").formatted(Formatting.GRAY))
         } else {
             tooltip.add(Text.translatable("global.fabadditions.tooltip").formatted(Formatting.GRAY))
         }

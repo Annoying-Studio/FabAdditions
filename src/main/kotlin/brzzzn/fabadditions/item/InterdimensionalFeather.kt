@@ -14,7 +14,7 @@ class InterdimensionalFeather(settings: Settings?) : AmethystFeather(settings) {
 
     override fun appendTooltip(stack: ItemStack, world: World?, tooltip: MutableList<Text>, context: TooltipContext) {
         if (Screen.hasShiftDown()) {
-            tooltip.add(Text.translatable("item.fabadditions.interdimensional_mirror.tooltip").formatted(Formatting.GRAY))
+            tooltip.add(Text.translatable("item.fabadditions.interdimensional_feather.tooltip").formatted(Formatting.GRAY))
         } else {
             tooltip.add(Text.translatable("global.fabadditions.tooltip").formatted(Formatting.GRAY))
         }
