@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo
 @Mixin(TitleScreen::class)
 class ExampleMixin {
     @Inject(at = [At("HEAD")], method = ["init()V"])
-    private fun init(info: CallbackInfo) {
-        logger.info("This line is printed by an example mod mixin!")
+    fun init(info: CallbackInfo) {
+        logger.info("Started mixin!")
     }
 }

@@ -2,6 +2,7 @@ plugins {
 	id 'fabric-loom' version '1.1-SNAPSHOT'
 	id 'maven-publish'
 	id 'org.jetbrains.kotlin.jvm' version '1.8.10'
+	id "org.jetbrains.kotlin.plugin.allopen" version "1.8.10"
 }
 
 sourceCompatibility = JavaVersion.VERSION_17
@@ -87,4 +88,9 @@ compileTestKotlin {
 	kotlinOptions {
 		jvmTarget = "1.8"
 	}
+}
+
+allOpen {
+	annotation("org.spongepowered.asm.mixin.Mixin")
+	annotation("org.spongepowered.asm.mixin.injection.Inject")
 }
