@@ -28,6 +28,6 @@ public class FabBlocks
 
     public static void registerModBlocks()
     {
-        FabAdditions.LOGGER.debug("Registering Mod Blocks/Items for " + FabAdditions.ID);
+        FabAdditions.Companion.getLogger().debug("Registering Mod Blocks/Items for " + FabAdditions.ID);
     }
 }

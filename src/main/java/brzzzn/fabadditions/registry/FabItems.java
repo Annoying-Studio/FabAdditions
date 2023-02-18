@@ -24,7 +24,7 @@ public class FabItems
 
     public static void registerModItems()
     {
-        FabAdditions.LOGGER.debug("Registering Mod Items for " + FabAdditions.ID);
+        FabAdditions.Companion.getLogger().debug("Registering Mod Items for " + FabAdditions.ID);
 
     }
 }

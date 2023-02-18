@@ -1,14 +1,7 @@
-package brzzzn.fabadditions;
+package brzzzn.fabadditions
 
-import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.fabric.api.client.screenhandler.v1.ScreenRegistry;
+import net.fabricmc.api.ClientModInitializer
 
-public class FabAdditionsClient implements ClientModInitializer
-{
-
-    @Override
-    public void onInitializeClient()
-    {
-
-    }
+class FabAdditionsClient : ClientModInitializer {
+    override fun onInitializeClient() {}
 }
