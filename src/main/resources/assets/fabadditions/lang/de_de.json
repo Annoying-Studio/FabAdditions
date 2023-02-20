@@ -11,5 +11,8 @@
   "item.fabadditions.interdimensional_feather.tooltip": "Teleportiert dich zu deinem Einstiegspunkt.",
 
   "item.fabadditions.kiln": "Töpfer Ofen",
-  "item.fabadditions.kiln.tooltip": "Für Ziegelstein, Glass und Terrakotta."
+  "item.fabadditions.kiln.tooltip": "Für Ziegelstein, Glass und Terrakotta.",
+
+  "item.fabadditions.phantom_staff": "Phantom Stab",
+  "item.fabadditions.phantom_staff.tooltip": "Erlaubt das Teleportieren zu anderen Spielern."
 }
