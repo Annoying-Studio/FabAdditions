@@ -4,7 +4,6 @@ import io.github.cottonmc.cotton.gui.client.LightweightGuiDescription
 import io.github.cottonmc.cotton.gui.widget.WButton
 import io.github.cottonmc.cotton.gui.widget.WGridPanel
 import io.github.cottonmc.cotton.gui.widget.WLabel
-import net.minecraft.client.MinecraftClient
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.text.Text
 
@@ -19,7 +18,6 @@ class PhantomStaffGui(
 
         root.add(WLabel(Text.translatable("item.fabadditions.phantom_staff")), 1, 1)
 
-        MinecraftClient.getInstance().networkHandler?.playerList
         val scrollPanel = WGridPanel()
 
         for (player in players.withIndex()) {
