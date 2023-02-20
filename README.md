@@ -16,7 +16,7 @@ Originally made for a 1.19.2 server with friends, now publicly available.
 # Permission & Licenses
 This project is licensed under the MIT License and thus can be used freely in accordance with said license.
 
-3rd party licenses are included in the ./3rdPartyLICENCES file and under ./license
+3rd party licenses are included in the ./3rdPartyLICENCES file and under ./licenses
 
 #### The following libraries are used in this project:
 - LibGui
