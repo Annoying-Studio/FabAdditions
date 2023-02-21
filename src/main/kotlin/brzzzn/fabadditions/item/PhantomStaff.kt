@@ -38,9 +38,9 @@ class PhantomStaff(settings: Settings) : Item(settings) {
         }
 
         // Remove self from set
-//        players.removeIf {
-//            it.uuid == user.uuid
-//        }
+        players.removeIf {
+            it.uuid == user.uuid
+        }
 
         phantomStaffScreen = PhantomStaffScreen(PhantomStaffGui(players) { teleportToPlayer(user, it) })
 
