@@ -28,10 +28,10 @@ class PhantomStaff(settings: Settings) : Item(settings) {
             players.addAll(it.players)
         }
 
-        // Remove self from set
-        players.removeIf {
-            it.uuid == user.uuid
-        }
+//        // Remove self from set
+//        players.removeIf {
+//            it.uuid == user.uuid
+//        }
 
         MinecraftClient.getInstance().execute {
             MinecraftClient.getInstance().setScreen(PhantomStaffScreen(PhantomStaffGui(players) { teleportToPlayer(user, it) }))
