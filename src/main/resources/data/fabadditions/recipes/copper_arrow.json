@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " G ",
+    " # ",
+    "   "
+  ],
+  "key":
+  {
+    "#":
+    {
+      "item": "minecraft:arrow"
+    },
+    "G":
+    {
+      "item": "minecraft:copper_ingot"
+    }
+  },
+  "result":
+  {
+    "item": "fabadditions:copper_arrow"
+  }
+}
