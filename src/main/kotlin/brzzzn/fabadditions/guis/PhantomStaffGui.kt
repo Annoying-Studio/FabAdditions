@@ -4,33 +4,42 @@ import io.github.cottonmc.cotton.gui.client.LightweightGuiDescription
 import io.github.cottonmc.cotton.gui.widget.WButton
 import io.github.cottonmc.cotton.gui.widget.WGridPanel
 import io.github.cottonmc.cotton.gui.widget.WLabel
-import net.minecraft.client.MinecraftClient
+import io.github.cottonmc.cotton.gui.widget.WListPanel
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.text.Text
 
 class PhantomStaffGui(
-        val players: Set<PlayerEntity>,
-        val teleportLambda: (PlayerEntity) -> Unit
+    players: Set<PlayerEntity>,
+    private val teleportLambda: (PlayerEntity) -> Unit
 ) : LightweightGuiDescription() {
     init {
         val root = WGridPanel()
 
         setRootPanel(root)
 
-        root.add(WLabel(Text.translatable("item.fabadditions.phantom_staff")), 1, 1)
+        root.add(
+            WLabel(
+                Text.translatable("item.fabadditions.phantom_staff")),
+            1,
+            1,
+            9,
+            1
+        )
 
-        MinecraftClient.getInstance().networkHandler?.playerList
-        val scrollPanel = WGridPanel()
+        val list = WListPanel(
+            players.toMutableList(),
+            { WButton() },
+            { player, button ->
+                button.label = player.displayName
+                button.setSize(root.width, 18)
+                button.onClick = Runnable {
+                    teleportLambda.invoke(player)
+                }
+            }
+        )
 
-        for (player in players.withIndex()) {
-            val tpButton = WButton(Text.of(player.value.displayName.string ?: ""))
-            tpButton.onClick = Runnable { teleportLambda.invoke(player.value) }
-            scrollPanel.add(tpButton, 0, player.index)
-        }
+        root.add(list, 1, 2, 10, 9)
 
-        root.add(scrollPanel, 0, 0)
-
-
-        root.setSize(100, 100)
+        root.setSize(12*18, 12*18)
     }
 }
