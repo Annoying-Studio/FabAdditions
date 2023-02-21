@@ -10,9 +10,9 @@
   "item.fabadditions.interdimensional_feather": "Interdimensional Feather",
   "item.fabadditions.interdimensional_feather.tooltip": "Teleports you back to your respawn location across dimensions.",
 
-  "item.fabadditions.kiln": "Pottery Kiln",
-  "item.fabadditions.kiln.tooltip": "For Bricks, Glass and Terracotta",
-
   "item.fabadditions.phantom_staff": "Phantom Staff",
-  "item.fabadditions.phantom_staff.tooltip": "Allows you to teleport to other players"
+  "item.fabadditions.phantom_staff.tooltip": "Allows you to teleport to other Players",
+
+  "item.fabadditions.copper_arrow": "Copper Arrow",
+  "item.fabadditions.copper_arrow.tooltip": "Has a 50% chance of creating a lightning during thunderstorms."
 }
