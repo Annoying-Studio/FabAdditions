@@ -1,0 +1,35 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BNB",
+    "PEP",
+    " S "
+  ],
+  "key":
+  {
+    "S":
+    {
+      "item": "minecraft:stick"
+    },
+    "B":
+    {
+      "item": "minecraft:black_dye"
+    },
+    "P":
+    {
+      "item": "minecraft:phantom_membrane"
+    },
+    "N":
+    {
+      "item": "minecraft:end_crystal"
+    },
+    "E":
+    {
+      "item": "minecraft:ender_eye"
+    }
+  },
+  "result":
+  {
+    "item": "fabadditions:phantom_staff"
+  }
+}
