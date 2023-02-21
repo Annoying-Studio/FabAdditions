@@ -16,6 +16,7 @@ import net.minecraft.util.TypedActionResult
 import net.minecraft.world.World
 
 class PhantomStaff(settings: Settings) : Item(settings) {
+
     override fun use(world: World?, user: PlayerEntity?, hand: Hand?): TypedActionResult<ItemStack> {
         if (world?.isClient == true || hand != Hand.MAIN_HAND || user?.isSneaking == true) return super.use(world, user, hand)
 
@@ -28,10 +29,10 @@ class PhantomStaff(settings: Settings) : Item(settings) {
             players.addAll(it.players)
         }
 
-//        // Remove self from set
-//        players.removeIf {
-//            it.uuid == user.uuid
-//        }
+        // Remove self from set
+        players.removeIf {
+            it.uuid == user.uuid
+        }
 
         MinecraftClient.getInstance().execute {
             MinecraftClient.getInstance().setScreen(PhantomStaffScreen(PhantomStaffGui(players) { teleportToPlayer(user, it) }))

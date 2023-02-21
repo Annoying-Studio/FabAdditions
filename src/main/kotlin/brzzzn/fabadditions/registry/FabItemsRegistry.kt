@@ -9,14 +9,16 @@ import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.minecraft.item.Item
 import net.minecraft.item.ItemGroup
 import net.minecraft.util.Identifier
+import net.minecraft.util.Rarity
 import net.minecraft.util.registry.Registry
 
 object FabItemsRegistry {
 
     //region default settings
-    private val defaultToolSettings: FabricItemSettings = FabricItemSettings()
+    private val rareToolSettings: FabricItemSettings = FabricItemSettings()
             .group(ItemGroup.TOOLS)
             .maxCount(1)
+            .rarity(Rarity.UNCOMMON)
     //endregion
 
     /**
@@ -41,17 +43,17 @@ object FabItemsRegistry {
         // Amethyst Feather
         registerItem(
                 "amethyst_feather",
-                AmethystFeather(defaultToolSettings)
+                AmethystFeather(rareToolSettings)
         )
         // Interdimensional Feather
         registerItem(
                 "interdimensional_feather",
-                InterdimensionalFeather(defaultToolSettings)
+                InterdimensionalFeather(rareToolSettings)
         )
         // Phantom staff
         registerItem(
                 "phantom_staff",
-                PhantomStaff(defaultToolSettings)
+                PhantomStaff(rareToolSettings)
         )
     }
 }
