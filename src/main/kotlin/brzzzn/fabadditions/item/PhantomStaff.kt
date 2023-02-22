@@ -1,9 +1,13 @@
 package brzzzn.fabadditions.item
 
+import brzzzn.fabadditions.Constants
+import brzzzn.fabadditions.FabAdditions
 import brzzzn.fabadditions.guis.PhantomStaffGui
 import brzzzn.fabadditions.screens.PhantomStaffScreen
 import kotlinx.coroutines.*
-import net.minecraft.client.MinecraftClient
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking
 import net.minecraft.client.gui.screen.Screen
 import net.minecraft.client.item.TooltipContext
 import net.minecraft.entity.effect.StatusEffectInstance
@@ -22,33 +26,75 @@ import net.minecraft.world.World
 
 class PhantomStaff(settings: Settings) : Item(settings) {
 
-    var phantomStaffScreen: Screen? = null
-    var teleportJob: Job? = null
+    private var phantomStaffScreen: Screen? = null
+    private var teleportJob: Job? = null
 
+    init {
+        // Client logic in response to server packet
+        ClientPlayNetworking.registerGlobalReceiver(Constants.NetworkChannel.PHANTOM_STAFF_S2C_PACKET_ID) {
+                client, _, _, _ ->
+            client.execute {
+                // Get players from server
+                val players = hashSetOf<PlayerEntity>()
+
+                client.server?.worlds?.forEach {
+                    players.addAll(it.players)
+                }
+
+                // Remove self from set
+                players.removeIf {
+                    it.uuid == client.player?.uuid
+                }
+
+                // Create display screen
+                phantomStaffScreen = PhantomStaffScreen(PhantomStaffGui(players) {
+                    ClientPlayNetworking.send(
+                        Constants.NetworkChannel.PHANTOM_STAFF_C2S_PACKET_ID,
+                        PacketByteBufs.create().writeUuid(it.uuid)
+                    )
+                    phantomStaffScreen?.close()
+                })
+
+                client.setScreen(phantomStaffScreen)
+            }
+        }
+
+        // Server logic in response to client packet
+        ServerPlayNetworking.registerGlobalReceiver(Constants.NetworkChannel.PHANTOM_STAFF_C2S_PACKET_ID) {
+                server, client, _, buf, _ ->
+
+            val sourcePlayer = server.playerManager.getPlayer(client.uuid) ?: run {
+                FabAdditions.logger.warn("Sending Player found with uuid: ${buf.readUuid()}")
+                return@registerGlobalReceiver
+            }
+
+            val targetPlayer = server.playerManager.getPlayer(buf.readUuid()) ?: run {
+                FabAdditions.logger.warn("Target Player found with uuid: ${buf.readUuid()}")
+                return@registerGlobalReceiver
+            }
+
+            teleportToPlayer(
+                sourcePlayer,
+                targetPlayer
+            )
+        }
+    }
+    // Handle use -> Only handle on server
     override fun use(world: World?, user: PlayerEntity?, hand: Hand?): TypedActionResult<ItemStack> {
-        if (world?.isClient == true || hand != Hand.MAIN_HAND || user?.isSneaking == true) return super.use(world, user, hand)
+        if (world?.isClient() == true || hand != Hand.MAIN_HAND || user?.isSneaking == true) return run {
+            FabAdditions.logger.trace("Is Client. Server must issue action")
+            super.use(world, user, hand)
+        }
 
         // Check that player is server player
         if (user !is ServerPlayerEntity) return super.use(world, user, hand)
 
-        val players = hashSetOf<PlayerEntity>()
+        ServerPlayNetworking.send(
+            user,
+            Constants.NetworkChannel.PHANTOM_STAFF_S2C_PACKET_ID,
+            PacketByteBufs.empty()
+        )
 
-        user.server.worlds.forEach {
-            players.addAll(it.players)
-        }
-
-        // Remove self from set
-        players.removeIf {
-            it.uuid == user.uuid
-        }
-
-        phantomStaffScreen = PhantomStaffScreen(PhantomStaffGui(players) { teleportToPlayer(user, it) })
-
-        MinecraftClient.getInstance().execute {
-            phantomStaffScreen?.let {
-                MinecraftClient.getInstance().setScreen(it)
-            }
-        }
         return super.use(world, user, hand)
     }
 
@@ -56,6 +102,7 @@ class PhantomStaff(settings: Settings) : Item(settings) {
     private fun teleportToPlayer(user: PlayerEntity, player: PlayerEntity) {
         if (user !is ServerPlayerEntity) return
 
+        // Add effects
         user.addStatusEffect(
             StatusEffectInstance(StatusEffects.LEVITATION, 3*20, 1, false, false)
         )
@@ -68,10 +115,7 @@ class PhantomStaff(settings: Settings) : Item(settings) {
             StatusEffectInstance(StatusEffects.BLINDNESS, 4*20, 1, false, false)
         )
 
-        MinecraftClient.getInstance().execute {
-            phantomStaffScreen?.close()
-        }
-
+        // Start coroutine to teleport player after a delay
         if (teleportJob?.isActive == true) return
         teleportJob = GlobalScope.launch {
             delay(3000)
