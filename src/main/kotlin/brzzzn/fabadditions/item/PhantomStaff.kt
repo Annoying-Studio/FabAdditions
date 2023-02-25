@@ -2,8 +2,11 @@ package brzzzn.fabadditions.item
 
 import brzzzn.fabadditions.Constants
 import brzzzn.fabadditions.FabAdditions
+import brzzzn.fabadditions.data.PlayerList
+import brzzzn.fabadditions.data.PlayerRef
 import brzzzn.fabadditions.guis.PhantomStaffGui
 import brzzzn.fabadditions.screens.PhantomStaffScreen
+import com.google.gson.Gson
 import kotlinx.coroutines.*
 import net.fabricmc.api.EnvType
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking
@@ -25,6 +28,7 @@ import net.minecraft.util.Formatting
 import net.minecraft.util.Hand
 import net.minecraft.util.TypedActionResult
 import net.minecraft.world.World
+import java.util.*
 
 class PhantomStaff(settings: Settings) : Item(settings) {
 
@@ -36,29 +40,25 @@ class PhantomStaff(settings: Settings) : Item(settings) {
             EnvType.CLIENT -> {
                 // Client logic in response to server packet
                 ClientPlayNetworking.registerGlobalReceiver(Constants.NetworkChannel.PHANTOM_STAFF_S2C_PACKET_ID) {
-                        client, _, _, _ ->
-                    client.execute {
-                        // Get players from server
-                        val players = hashSetOf<PlayerEntity>()
+                        client, _, buf, _ ->
+                    val buffer = buf.readString()
+                    FabAdditions.logger.debug(buffer)
+                    val players = Gson().fromJson(buffer, PlayerList::class.java)
 
-                        client.server?.worlds?.forEach {
-                            players.addAll(it.players)
-                        }
+                    println(players)
 
-                        // Remove self from set
-                        players.removeIf {
-                            it.uuid == client.player?.uuid
-                        }
 
-                        // Create display screen
-                        phantomStaffScreen = PhantomStaffScreen(PhantomStaffGui(players) {
-                            ClientPlayNetworking.send(
-                                Constants.NetworkChannel.PHANTOM_STAFF_C2S_PACKET_ID,
-                                PacketByteBufs.create().writeUuid(it.uuid)
-                            )
+                    // Create display screen
+                    phantomStaffScreen = PhantomStaffScreen(PhantomStaffGui(players) {
+                        ClientPlayNetworking.send(
+                            Constants.NetworkChannel.PHANTOM_STAFF_C2S_PACKET_ID,
+                            PacketByteBufs.create().writeString(it.uuid)
+                        )
+                        client.execute {
                             phantomStaffScreen?.close()
-                        })
-
+                        }
+                    })
+                    client.execute {
                         client.setScreen(phantomStaffScreen)
                     }
                 }
@@ -71,20 +71,32 @@ class PhantomStaff(settings: Settings) : Item(settings) {
         ServerPlayNetworking.registerGlobalReceiver(Constants.NetworkChannel.PHANTOM_STAFF_C2S_PACKET_ID) {
                 server, client, _, buf, _ ->
 
-            val sourcePlayer = server.playerManager.getPlayer(client.uuid) ?: run {
-                FabAdditions.logger.warn("Sending Player found with uuid: ${buf.readUuid()}")
-                return@registerGlobalReceiver
+            try {
+                val string = buf.readString()
+
+                val uuid: UUID = UUID.fromString(string)
+
+                val sourcePlayer = server.playerManager.getPlayer(client.uuid) ?: run {
+                    FabAdditions.logger.warn("Sending Player found with uuid: $uuid")
+                    return@registerGlobalReceiver
+                }
+
+                val targetPlayer = server.playerManager.getPlayer(uuid) ?: run {
+                    FabAdditions.logger.warn("Target Player found with uuid: $uuid")
+                    return@registerGlobalReceiver
+                }
+
+                teleportToPlayer(
+                    sourcePlayer,
+                    targetPlayer
+                )
+            } catch (e: Exception) {
+                FabAdditions.logger.error(
+                    "Encountered an error: ${e.message} on serverside while trying to teleport player: ${client.name} : ${client.uuid}", e
+                )
             }
 
-            val targetPlayer = server.playerManager.getPlayer(buf.readUuid()) ?: run {
-                FabAdditions.logger.warn("Target Player found with uuid: ${buf.readUuid()}")
-                return@registerGlobalReceiver
-            }
 
-            teleportToPlayer(
-                sourcePlayer,
-                targetPlayer
-            )
         }
     }
     // Handle use -> Only handle on server
@@ -97,10 +109,26 @@ class PhantomStaff(settings: Settings) : Item(settings) {
         // Check that player is server player
         if (user !is ServerPlayerEntity) return super.use(world, user, hand)
 
+        val players = PlayerList(mutableListOf())
+
+        for (worldInstance in world?.server?.worlds ?: listOf()) {
+            players.players.addAll(
+                worldInstance.players.map {
+                    PlayerRef(it.displayName.string, it.uuid.toString())
+                }
+            )
+        }
+
+        players.players.removeIf {
+            it.uuid == user.uuidAsString
+        }
+
+        val string = Gson().toJson(players)
+
         ServerPlayNetworking.send(
             user,
             Constants.NetworkChannel.PHANTOM_STAFF_S2C_PACKET_ID,
-            PacketByteBufs.empty()
+            PacketByteBufs.create().writeString(string)
         )
 
         return super.use(world, user, hand)
