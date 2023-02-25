@@ -1,16 +1,17 @@
 package brzzzn.fabadditions.guis
 
+import brzzzn.fabadditions.data.PlayerList
+import brzzzn.fabadditions.data.PlayerRef
 import io.github.cottonmc.cotton.gui.client.LightweightGuiDescription
 import io.github.cottonmc.cotton.gui.widget.WButton
 import io.github.cottonmc.cotton.gui.widget.WGridPanel
 import io.github.cottonmc.cotton.gui.widget.WLabel
 import io.github.cottonmc.cotton.gui.widget.WListPanel
-import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.text.Text
 
 class PhantomStaffGui(
-    players: Set<PlayerEntity>,
-    private val teleportLambda: (PlayerEntity) -> Unit
+    players: PlayerList,
+    private val teleportLambda: (PlayerRef) -> Unit
 ) : LightweightGuiDescription() {
     init {
         val root = WGridPanel()
@@ -27,10 +28,10 @@ class PhantomStaffGui(
         )
 
         val list = WListPanel(
-            players.toMutableList(),
+            players.players,
             { WButton() },
             { player, button ->
-                button.label = player.displayName
+                button.label = Text.of(player.name)
                 button.setSize(root.width, 18)
                 button.onClick = Runnable {
                     teleportLambda.invoke(player)
