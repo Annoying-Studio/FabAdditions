@@ -23,12 +23,15 @@ class ChunkLoader(settings: Settings?) : BlockWithEntity(settings), BlockEntityP
         return BlockRenderType.MODEL
     }
 
-    override fun onBlockAdded(state: BlockState?, world: World?, pos: BlockPos?, oldState: BlockState?, notify: Boolean)
+    override fun onBlockAdded(state: BlockState, world: World, pos: BlockPos?, oldState: BlockState, notify: Boolean)
     {
-        val blockEntity = world?.getBlockEntity(pos)
-        if (blockEntity is ChunkLoaderBlockEntity)
+        if (state.block !== oldState.block)
         {
-            (blockEntity as ChunkLoaderBlockEntity?)?.load(world, true)
+            val blockEntity = world.getBlockEntity(pos)
+            if (blockEntity is ChunkLoaderBlockEntity)
+            {
+                (blockEntity as ChunkLoaderBlockEntity?)?.load(world, true)
+            }
         }
         super.onBlockAdded(state, world, pos, oldState, notify)
     }
