@@ -16,7 +16,7 @@ class InterdimensionalFeather(settings: Settings?) : AmethystFeather(settings) {
         if (Screen.hasShiftDown()) {
             tooltip.add(Text.translatable("item.fabadditions.interdimensional_feather.tooltip").formatted(Formatting.GRAY))
         } else {
-            tooltip.add(Text.translatable("global.fabadditions.tooltip").formatted(Formatting.GRAY))
+            tooltip.add(Text.translatable("tooltip.fabadditions.hold_shift").formatted(Formatting.GRAY))
         }
     }
 }

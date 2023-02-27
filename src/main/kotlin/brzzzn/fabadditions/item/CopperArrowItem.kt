@@ -24,7 +24,7 @@ class CopperArrowItem(settings: Settings) : ArrowItem(settings)
             tooltip.add(Text.translatable("item.fabadditions.copper_arrow.tooltip").formatted(Formatting.GRAY))
         } else
         {
-            tooltip.add(Text.translatable("global.fabadditions.tooltip").formatted(Formatting.GRAY))
+            tooltip.add(Text.translatable("tooltip.fabadditions.hold_shift").formatted(Formatting.GRAY))
         }
     }
 }

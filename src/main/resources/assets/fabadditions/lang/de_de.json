@@ -1,8 +1,9 @@
 {
-  "global.fabadditions.tooltip": "Halte [Shift]",
-  "global.fabadditions.no_respawn": "Kein Einstigspunkt gesetzt!",
-  "global.fabadditions.config_disabled": "Item wurde durch die Config aussgeschaltet!",
-  "global.fabadditions.wrong_dimension": "Dein Einstiegspunkt ist in einer anderen Dimension!",
+  "tooltip.fabadditions.hold_shift": "Halte SHIFT für Infos.",
+
+  "chat.fabadditions.no_respawn": "Kein Einstigspunkt gesetzt!",
+  "chat.fabadditions.config_disabled": "Item wurde durch die Config aussgeschaltet!",
+  "chat.fabadditions.wrong_dimension": "Dein Einstiegspunkt ist in einer anderen Dimension!",
 
   "item.fabadditions.amethyst_feather": "Amethyst Feder",
   "item.fabadditions.amethyst_feather.tooltip": "Teleportiert dich zu deinem Einstiegspunkt.",
@@ -14,5 +15,8 @@
   "item.fabadditions.phantom_staff.tooltip": "Erlaubt das Teleportieren zu anderen Spielern.",
 
   "item.fabadditions.copper_arrow": "Kupfer Pfeil",
-  "item.fabadditions.copper_arrow.tooltip": "Hat eine 50% chance einen Blitz während Gewitter zu erschaffen."
+  "item.fabadditions.copper_arrow.tooltip": "Hat eine 50% chance einen Blitz während Gewitter zu erschaffen.",
+
+  "block.fabadditions.chunk_loader": "Chunk Lade-Block",
+  "block.fabadditions.chunk_loader.tooltip": "Markiert den Chunk als Dauerhaften-Chunk."
 }
