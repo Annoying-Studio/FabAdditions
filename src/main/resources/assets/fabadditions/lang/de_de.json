@@ -15,7 +15,9 @@
   "item.fabadditions.phantom_staff.tooltip": "Erlaubt das Teleportieren zu anderen Spielern.",
 
   "item.fabadditions.copper_arrow": "Kupfer Pfeil",
-  "item.fabadditions.copper_arrow.tooltip": "Hat eine 50% chance einen Blitz während Gewitter zu erschaffen.",
+  "item.fabadditions.copper_arrow.tooltip": "Kann einen Blitz während eines Gewitters erschaffen.",
+  "item.fabadditions.bomb_arrow": "Bomben Pfeil",
+  "item.fabadditions.bomb_arrow.tooltip": "Erzeugt eine Explosion beim Einschlag",
 
   "block.fabadditions.chunk_loader": "Chunk Lade-Block",
   "block.fabadditions.chunk_loader.tooltip": "Markiert den Chunk als Dauerhaften-Chunk."

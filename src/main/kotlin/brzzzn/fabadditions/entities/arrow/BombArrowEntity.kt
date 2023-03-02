@@ -10,20 +10,19 @@ import net.minecraft.particle.ParticleTypes
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.hit.EntityHitResult
 import net.minecraft.util.hit.HitResult
-import net.minecraft.util.math.BlockPos
-import net.minecraft.util.math.Vec3d
-import net.minecraft.util.math.random.Random
+import net.minecraft.world.GameRules
 import net.minecraft.world.World
 import net.minecraft.world.event.GameEvent
+import net.minecraft.world.explosion.Explosion
 
 
-class CopperArrowEntity : PersistentProjectileEntity
+class BombArrowEntity : PersistentProjectileEntity
 {
-    constructor(entityType: EntityType<out CopperArrowEntity?>?, world: World?) : super(entityType as EntityType<out PersistentProjectileEntity?>?, world)
-    constructor(x:Double, y:Double, z:Double, world: World) : super(FabEntityRegistry.COPPER_ARROW, x,y,z,world)
-    constructor(owner: LivingEntity, world: World) : super(FabEntityRegistry.COPPER_ARROW, owner,world)
+    constructor(entityType: EntityType<out BombArrowEntity?>?, world: World?) : super(entityType as EntityType<out PersistentProjectileEntity?>?, world)
+    constructor(x:Double, y:Double, z:Double, world: World) : super(FabEntityRegistry.BOMB_ARROW, x,y,z,world)
+    constructor(owner: LivingEntity, world: World) : super(FabEntityRegistry.BOMB_ARROW, owner,world)
 
-    private val lightningSpawnChance:Int = 25
+    private val explosionPower = 2.5f
 
     override fun initDataTracker()
     {
@@ -32,7 +31,7 @@ class CopperArrowEntity : PersistentProjectileEntity
 
     override fun asItemStack(): ItemStack
     {
-        return ItemStack(FabItemsRegistry.COPPER_ARROW)
+        return ItemStack(FabItemsRegistry.BOMB_ARROW)
     }
 
     override fun tick()
@@ -63,10 +62,10 @@ class CopperArrowEntity : PersistentProjectileEntity
         val d = (16 and 0xFF).toDouble() / 255.0
         val e = (8 and 0xFF).toDouble() / 255.0
         val f = 0.toDouble() / 255.0
-        for (j in 0 until amount)
+        for (i in 0 until amount)
         {
             world.addParticle(
-                ParticleTypes.ELECTRIC_SPARK,
+                ParticleTypes.SMALL_FLAME,
                 getParticleX(0.5), this.randomBodyY, getParticleZ(0.5), d, e, f
             )
         }
@@ -77,7 +76,7 @@ class CopperArrowEntity : PersistentProjectileEntity
         super.onHit(target)
         if (target != null)
         {
-            trySpawnLightning(target.blockPos)
+            trySpawnExplosion()
         }
     }
 
@@ -89,7 +88,7 @@ class CopperArrowEntity : PersistentProjectileEntity
             onEntityHit(hitResult as EntityHitResult?)
         } else if (type == HitResult.Type.BLOCK)
         {
-            trySpawnLightning(this.blockPos)
+            trySpawnExplosion()
             onBlockHit(hitResult as BlockHitResult?)
         }
         if (type != HitResult.Type.MISS)
@@ -98,18 +97,9 @@ class CopperArrowEntity : PersistentProjectileEntity
         }
     }
 
-    private fun trySpawnLightning(blockPos: BlockPos)
+    private fun trySpawnExplosion()
     {
-        val rand = Random.createLocal().nextInt(100)
-        if(rand > lightningSpawnChance)
-        {
-            if (world.isThundering && this.world.isSkyVisible(blockPos))
-            {
-                val lightning = EntityType.LIGHTNING_BOLT.create(world)
-                lightning?.refreshPositionAfterTeleport(Vec3d.ofBottomCenter(blockPos))
-                world.spawnEntity(lightning)
-                this.discard()
-            }
-        }
+        world.createExplosion(this, this.x, this.y, this.z, explosionPower, Explosion.DestructionType.NONE)
+        this.discard()
     }
 }

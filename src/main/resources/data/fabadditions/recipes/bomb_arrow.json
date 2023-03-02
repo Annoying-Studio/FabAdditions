@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " G ",
+    "G#G",
+    " G "
+  ],
+  "key":
+  {
+    "#":
+    {
+      "item": "minecraft:arrow"
+    },
+    "G":
+    {
+      "item": "minecraft:gunpowder"
+    }
+  },
+  "result":
+  {
+    "item": "fabadditions:bomb_arrow",
+    "count": "2"
+  }
+}

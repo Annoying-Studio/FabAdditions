@@ -1,6 +1,7 @@
 package brzzzn.fabadditions.registry
 
 import brzzzn.fabadditions.FabAdditions
+import brzzzn.fabadditions.entities.arrow.BombArrowEntity
 import brzzzn.fabadditions.entities.arrow.CopperArrowEntity
 import net.fabricmc.fabric.api.`object`.builder.v1.entity.FabricEntityTypeBuilder
 import net.minecraft.entity.Entity
@@ -15,6 +16,13 @@ object FabEntityRegistry
     val COPPER_ARROW = registerEntity(
         "copper_arrow",
         FabricEntityTypeBuilder.create(SpawnGroup.MISC, ::CopperArrowEntity)
+            .dimensions(EntityDimensions.fixed(0.5f, 0.5f))
+            .trackRangeBlocks(4).trackedUpdateRate(20).build()
+    )
+
+    val BOMB_ARROW = registerEntity(
+        "bomb_arrow",
+        FabricEntityTypeBuilder.create(SpawnGroup.MISC, ::BombArrowEntity)
             .dimensions(EntityDimensions.fixed(0.5f, 0.5f))
             .trackRangeBlocks(4).trackedUpdateRate(20).build()
     )

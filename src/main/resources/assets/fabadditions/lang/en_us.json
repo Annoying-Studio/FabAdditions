@@ -15,7 +15,9 @@
   "item.fabadditions.phantom_staff.tooltip": "Allows you to teleport to other Players",
 
   "item.fabadditions.copper_arrow": "Copper Arrow",
-  "item.fabadditions.copper_arrow.tooltip": "Has a 50% chance of creating a lightning during thunderstorms.",
+  "item.fabadditions.copper_arrow.tooltip": "May create a  lightning during thunderstorms.",
+  "item.fabadditions.bomb_arrow": "Bomb Arrow",
+  "item.fabadditions.bomb_arrow.tooltip": "Explodes on Impact.",
 
   "block.fabadditions.chunk_loader": "Chunk Loader",
   "block.fabadditions.chunk_loader.tooltip": "Marks the Chunk as forced."
