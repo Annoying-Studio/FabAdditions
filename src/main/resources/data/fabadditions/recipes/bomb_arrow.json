@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "pattern": [
     " G ",
-    "G#G",
+    " # ",
     " G "
   ],
   "key":
@@ -18,7 +18,6 @@
   },
   "result":
   {
-    "item": "fabadditions:bomb_arrow",
-    "count": "2"
+    "item": "fabadditions:bomb_arrow"
   }
 }
