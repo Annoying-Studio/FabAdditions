@@ -1,8 +1,9 @@
 {
-  "global.fabadditions.tooltip": "Hold [Shift]",
-  "global.fabadditions.no_respawn": "No respawnpoint set!",
-  "global.fabadditions.config_disabled": "Item disabled by config!",
-  "global.fabadditions.wrong_dimension": "The respawn location you are trying to access is in another dimension!",
+  "tooltip.fabadditions.hold_shift": "Hold SHIFT for info.",
+
+  "chat.fabadditions.no_respawn": "No respawnpoint set!",
+  "chat.fabadditions.config_disabled": "Item disabled by config!",
+  "chat.fabadditions.wrong_dimension": "The respawn location you are trying to access is in another dimension!",
 
   "item.fabadditions.amethyst_feather": "Amethyst Feather",
   "item.fabadditions.amethyst_feather.tooltip": "Teleports you back to your respawn location.",
@@ -14,5 +15,10 @@
   "item.fabadditions.phantom_staff.tooltip": "Allows you to teleport to other Players",
 
   "item.fabadditions.copper_arrow": "Copper Arrow",
-  "item.fabadditions.copper_arrow.tooltip": "Has a 50% chance of creating a lightning during thunderstorms."
+  "item.fabadditions.copper_arrow.tooltip": "May create a  lightning during thunderstorms.",
+  "item.fabadditions.bomb_arrow": "Bomb Arrow",
+  "item.fabadditions.bomb_arrow.tooltip": "Explodes on Impact.",
+
+  "block.fabadditions.chunk_loader": "Chunk Loader",
+  "block.fabadditions.chunk_loader.tooltip": "Marks the Chunk as forced."
 }

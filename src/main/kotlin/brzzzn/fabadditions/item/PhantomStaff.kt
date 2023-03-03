@@ -168,7 +168,7 @@ class PhantomStaff(settings: Settings) : Item(settings) {
         if (Screen.hasShiftDown()) {
             tooltip?.add(Text.translatable("item.fabadditions.phantom_staff.tooltip").formatted(Formatting.GRAY))
         } else {
-            tooltip?.add(Text.translatable("global.fabadditions.tooltip").formatted(Formatting.GRAY))
+            tooltip?.add(Text.translatable("tooltip.fabadditions.hold_shift").formatted(Formatting.GRAY))
         }
         super.appendTooltip(stack, world, tooltip, context)
     }

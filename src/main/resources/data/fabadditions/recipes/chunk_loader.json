@@ -1,0 +1,31 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ECE",
+    "ONO",
+    "OOO"
+  ],
+  "key":
+  {
+    "O":
+    {
+      "item": "minecraft:obsidian"
+    },
+    "C":
+    {
+      "item": "minecraft:end_crystal"
+    },
+    "E":
+    {
+      "item": "minecraft:ender_eye"
+    },
+    "N":
+    {
+      "item": "minecraft:netherite_ingot"
+    }
+  },
+  "result":
+  {
+    "item": "fabadditions:chunk_loader"
+  }
+}

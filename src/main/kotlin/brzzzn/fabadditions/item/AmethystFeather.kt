@@ -41,7 +41,7 @@ open class AmethystFeather(settings: Settings?) : Item(settings) {
                     if (respawnPos.isPresent) {
                         //teleport
                         if (!isInterdimensional && serverPlayer.getWorld() !== targetWorld) {
-                            user.sendMessage(Text.translatable("global.fabadditions.wrong_dimension").formatted(Formatting.RED))
+                            user.sendMessage(Text.translatable("chat.fabadditions.wrong_dimension").formatted(Formatting.RED))
                         } else {
                             val spawnVec = respawnPos.get()
                             serverPlayer.teleport(targetWorld, spawnVec.getX(), spawnVec.getY(), spawnVec.getZ(), serverPlayer.spawnAngle, 0.5f)
@@ -51,13 +51,13 @@ open class AmethystFeather(settings: Settings?) : Item(settings) {
                             targetWorld.playSound(null, spawnPos, SoundEvents.ITEM_CHORUS_FRUIT_TELEPORT, SoundCategory.PLAYERS, 0.5f, 1f)
                         }
                     } else {
-                        user.sendMessage(Text.translatable("global.fabadditions.no_respawn").formatted(Formatting.RED))
+                        user.sendMessage(Text.translatable("chat.fabadditions.no_respawn").formatted(Formatting.RED))
                     }
                 } else {
-                    user.sendMessage(Text.translatable("global.fabadditions.no_respawn").formatted(Formatting.RED))
+                    user.sendMessage(Text.translatable("chat.fabadditions.no_respawn").formatted(Formatting.RED))
                 }
             } else {
-                user.sendMessage(Text.translatable("global.fabadditions.config_disabled").formatted(Formatting.GOLD))
+                user.sendMessage(Text.translatable("chat.fabadditions.config_disabled").formatted(Formatting.GOLD))
             }
             user.itemCooldownManager[this] = 40
         }
@@ -68,7 +68,7 @@ open class AmethystFeather(settings: Settings?) : Item(settings) {
         if (Screen.hasShiftDown()) {
             tooltip.add(Text.translatable("item.fabadditions.amethyst_feather.tooltip").formatted(Formatting.GRAY))
         } else {
-            tooltip.add(Text.translatable("global.fabadditions.tooltip").formatted(Formatting.GRAY))
+            tooltip.add(Text.translatable("tooltip.fabadditions.hold_shift").formatted(Formatting.GRAY))
         }
     }
 }
