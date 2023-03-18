@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "fabadditions:block/blahaj"},
+    "facing=east":  { "model": "fabadditions:block/blahaj", "y":  90},
+    "facing=south": { "model": "fabadditions:block/blahaj", "y": 180},
+    "facing=west":  { "model": "fabadditions:block/blahaj", "y": 270}
+  }
+}
