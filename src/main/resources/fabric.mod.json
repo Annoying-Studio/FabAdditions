@@ -6,11 +6,11 @@
   "name": "Fab's Additions",
   "description": "Fab's Additions is a collection of random additions in a vanilla-like style. Adding new useful items, decorations and more.",
   "authors": [
-    "Brzzzn",
+    "FabForReal",
     "Tidari"
   ],
   "contact": {
-    "homepage": "https://twitter.com/Brzzzn",
+    "homepage": "https://github.com/Annoying-Studio/FabAdditions",
     "sources": "https://github.com/Annoying-Studio/FabAdditions"
   },
 
@@ -29,7 +29,7 @@
 
   "depends": {
     "fabricloader": ">=0.14.12",
-    "minecraft": "~1.19.2",
+    "minecraft": "~1.20.1",
     "java": ">=17",
     "fabric-api": "*",
     "fabric-language-kotlin": "*"
