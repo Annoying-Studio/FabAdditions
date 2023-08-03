@@ -34,6 +34,6 @@ class Blahaj(settings: Settings?) : HorizontalFacingBlock(settings)
 
     override fun getPlacementState(ctx: ItemPlacementContext): BlockState
     {
-        return defaultState.with(Properties.HORIZONTAL_FACING, ctx.playerFacing.opposite) as BlockState;
+        return defaultState.with(Properties.HORIZONTAL_FACING, ctx.playerLookDirection.opposite) as BlockState
     }
 }
