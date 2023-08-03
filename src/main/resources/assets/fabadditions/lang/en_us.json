@@ -21,7 +21,5 @@
   "item.fabadditions.bomb_arrow.tooltip": "Explodes on Impact.",
 
   "block.fabadditions.chunk_loader": "Chunk Loader",
-  "block.fabadditions.chunk_loader.tooltip": "Marks the Chunk as forced.",
-
-  "block.fabadditions.blahaj": "Toy Shark - Blahaj"
+  "block.fabadditions.chunk_loader.tooltip": "Marks the Chunk as forced."
 }

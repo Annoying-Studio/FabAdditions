@@ -13,17 +13,11 @@ class FabAdditionsClient : ClientModInitializer {
     override fun onInitializeClient()
     {
         initEntityRenderer()
-        initBlockRenderer()
     }
 
     private fun initEntityRenderer()
     {
         EntityRendererRegistry.register(FabEntityRegistry.COPPER_ARROW, ::CopperArrowEntityRenderer)
         EntityRendererRegistry.register(FabEntityRegistry.BOMB_ARROW, ::BombArrowEntityRenderer)
-    }
-
-    private fun initBlockRenderer()
-    {
-        BlockRenderLayerMap.INSTANCE.putBlock(FabBlockRegistry.BLAHAJ, RenderLayer.getCutout());
     }
 }

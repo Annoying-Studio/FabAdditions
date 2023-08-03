@@ -21,7 +21,5 @@
   "item.fabadditions.bomb_arrow.tooltip": "Erzeugt eine Explosion beim Einschlag",
 
   "block.fabadditions.chunk_loader": "Chunk Lade-Block",
-  "block.fabadditions.chunk_loader.tooltip": "Markiert den Chunk als Dauerhaften-Chunk.",
-
-  "block.fabadditions.blahaj": "Kuscheltier Hai - Blahaj"
+  "block.fabadditions.chunk_loader.tooltip": "Markiert den Chunk als Dauerhaften-Chunk."
 }

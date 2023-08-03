@@ -2,7 +2,6 @@ package brzzzn.fabadditions.registry
 
 import brzzzn.fabadditions.FabAdditions
 import brzzzn.fabadditions.FabAdditions.Companion.logger
-import brzzzn.fabadditions.block.Blahaj
 import brzzzn.fabadditions.block.ChunkLoader
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries
@@ -26,11 +25,6 @@ object FabBlockRegistry
         "chunk_loader",
         ChunkLoader(FabricBlockSettings.create().strength(1.5f).requiresTool()),
         ItemGroups.FUNCTIONAL)
-
-    val BLAHAJ = registerBlock(
-        "blahaj",
-        Blahaj(FabricBlockSettings.create().strength(0.2f).nonOpaque().sounds(BlockSoundGroup.WOOL)),
-            ItemGroups.FUNCTIONAL)
 
     /**
      * Registers a simple block as a mod block
