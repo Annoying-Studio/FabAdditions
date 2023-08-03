@@ -1,7 +1,11 @@
 # Fab's Additions
 
 Fab's Additions is a Vanilla+ Mod for Fabric. Adding new useful items and decorations.
-Originally made for a 1.19.2 server with friends, now publicly available.
+The mod is mainly developed for a server with friends. 
+
+We only maintain the latest major Minecraft update. The mod for older Minecraft versions will remain as a seperate stable branch.
+
+Feel free to learn from this repository or use it to develop your own mod.
 
 # Requirements
 
