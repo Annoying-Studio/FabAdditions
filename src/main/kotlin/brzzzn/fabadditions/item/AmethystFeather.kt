@@ -35,8 +35,8 @@ open class AmethystFeather(settings: Settings?) : Item(settings) {
                 if (respawnBlock is RespawnAnchorBlock) {
                     respawnPos = RespawnAnchorBlock.findRespawnPosition(EntityType.PLAYER, targetWorld, spawnPos)
                 } else if (respawnBlock is BedBlock) {
+                    //I have no clue what Direction we should give here??
                     respawnPos = BedBlock.findWakeUpPosition(EntityType.PLAYER, targetWorld, spawnPos, Direction.NORTH, serverPlayer.spawnAngle)
-                    //respawnPos = BedBlock.findWakeUpPosition(EntityType.PLAYER, targetWorld, spawnPos, serverPlayer.spawnAngle)
                 }
                 if (respawnPos.isPresent) {
                     //teleport
