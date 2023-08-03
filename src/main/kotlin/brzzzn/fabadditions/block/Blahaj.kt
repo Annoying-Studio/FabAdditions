@@ -31,9 +31,8 @@ class Blahaj(settings: Settings?) : HorizontalFacingBlock(settings)
             else -> VoxelShapes.fullCube()
         }
     }
-
-    override fun getPlacementState(ctx: ItemPlacementContext): BlockState
+    override fun getPlacementState(ctx: ItemPlacementContext): BlockState?
     {
-        return defaultState.with(Properties.HORIZONTAL_FACING, ctx.playerLookDirection.opposite) as BlockState
+        return super.getPlacementState(ctx)?.with(Properties.HORIZONTAL_FACING, ctx.horizontalPlayerFacing.opposite)
     }
 }
