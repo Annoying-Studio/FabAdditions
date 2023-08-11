@@ -10,6 +10,7 @@ import net.minecraft.world.World
 class InterdimensionalFeather(settings: Settings?) : AmethystFeather(settings) {
     init {
         isInterdimensional = true
+        experienceCost = 0
     }
 
     override fun appendTooltip(stack: ItemStack, world: World?, tooltip: MutableList<Text>, context: TooltipContext) {

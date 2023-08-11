@@ -35,6 +35,8 @@ class PhantomStaff(settings: Settings) : Item(settings) {
     private var phantomStaffScreen: Screen? = null
     private var teleportJob: Job? = null
 
+    private var experienceCost: Int = 1
+
     init {
         when (FabricLoader.getInstance().environmentType) {
             EnvType.CLIENT -> {
@@ -109,6 +111,13 @@ class PhantomStaff(settings: Settings) : Item(settings) {
         // Check that player is server player
         if (user !is ServerPlayerEntity) return super.use(world, user, hand)
 
+        // stop if the player does not have enough xp
+        if(user.experienceLevel < experienceCost)
+        {
+            user.sendMessage(Text.translatable("chat.fabadditions.not_enough_xp").formatted(Formatting.RED))
+            return super.use(world, user, hand)
+        }
+
         val players = PlayerList(mutableListOf())
 
         for (worldInstance in world?.server?.worlds ?: listOf()) {
@@ -162,6 +171,7 @@ class PhantomStaff(settings: Settings) : Item(settings) {
         }
 
         user.itemCooldownManager[this] = 120
+        user.setExperienceLevel(user.experienceLevel - experienceCost)
     }
 
     override fun appendTooltip(stack: ItemStack?, world: World?, tooltip: MutableList<Text>?, context: TooltipContext?) {
