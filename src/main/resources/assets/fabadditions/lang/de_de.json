@@ -4,6 +4,7 @@
   "chat.fabadditions.no_respawn": "Kein Einstigspunkt gesetzt!",
   "chat.fabadditions.config_disabled": "Item wurde durch die Config aussgeschaltet!",
   "chat.fabadditions.wrong_dimension": "Dein Einstiegspunkt ist in einer anderen Dimension!",
+  "chat.fabadditions.not_enough_xp": "Du hast nicht genug Erfahrungslevel!",
 
   "item.fabadditions.amethyst_feather": "Amethyst Feder",
   "item.fabadditions.amethyst_feather.tooltip": "Teleportiert dich zu deinem Einstiegspunkt.",
