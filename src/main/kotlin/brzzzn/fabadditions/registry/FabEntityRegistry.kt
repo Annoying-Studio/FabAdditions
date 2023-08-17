@@ -8,8 +8,9 @@ import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityDimensions
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.SpawnGroup
+import net.minecraft.registry.Registries
 import net.minecraft.util.Identifier
-import net.minecraft.util.registry.Registry
+import net.minecraft.registry.Registry
 
 object FabEntityRegistry
 {
@@ -29,7 +30,7 @@ object FabEntityRegistry
 
     private fun <T : Entity?> registerEntity(name: String, entityType: EntityType<T>): EntityType<T>?
     {
-        return Registry.register(Registry.ENTITY_TYPE, Identifier(FabAdditions.ID, name), entityType)
+        return Registry.register(Registries.ENTITY_TYPE, Identifier(FabAdditions.ID, name), entityType)
     }
 
     fun registerModEntities()

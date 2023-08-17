@@ -1,7 +1,11 @@
 # Fab's Additions
 
-Fab's Additions is a Vanilla+ Mod for Fabric. Adding new useful items and decorations.
-Originally made for a 1.19.2 server with friends, now publicly available.
+Fab's Additions is a collection of random additions. Adding new useful items, decorations and more.
+The mod is mainly developed for a server with friends.
+
+We only maintain the latest major Minecraft update. The versions for older Minecraft versions will remain as a seperate stable branch.
+
+Feel free to learn from this repository or use it to develop your own mod.
 
 # Requirements
 
@@ -11,7 +15,8 @@ Originally made for a 1.19.2 server with friends, now publicly available.
 
 # Download
 
-- <a href="https://modrinth.com/mod/fab-additions">Modrinth Download</a>
+- Download the latest stable release under the "Releases" section <a href="https://github.com/Annoying-Studio/FabAdditions/releases">here</a>
+- <a href="https://modrinth.com/mod/fab-additions">Modrinth Page</a>
 
 # Permission & Licenses
 This project is licensed under the MIT License and thus can be used freely in accordance with said license.

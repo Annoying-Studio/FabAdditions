@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " # ",
+    "###",
+    "GW "
+  ],
+  "key":
+  {
+    "#":
+    {
+      "item": "minecraft:blue_wool"
+    },
+    "G":
+    {
+      "item": "minecraft:pink_wool"
+    },
+    "W":
+    {
+      "item": "minecraft:white_wool"
+    }
+  },
+  "result":
+  {
+    "item": "fabadditions:blahaj"
+  }
+}

@@ -10,10 +10,8 @@ import net.minecraft.particle.ParticleTypes
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.hit.EntityHitResult
 import net.minecraft.util.hit.HitResult
-import net.minecraft.world.GameRules
 import net.minecraft.world.World
 import net.minecraft.world.event.GameEvent
-import net.minecraft.world.explosion.Explosion
 
 
 class BombArrowEntity : PersistentProjectileEntity
@@ -99,7 +97,7 @@ class BombArrowEntity : PersistentProjectileEntity
 
     private fun trySpawnExplosion()
     {
-        world.createExplosion(this, this.x, this.y, this.z, explosionPower, Explosion.DestructionType.NONE)
+        world.createExplosion(this, this.x, this.y, this.z, explosionPower, World.ExplosionSourceType.NONE)
         this.discard()
     }
 }

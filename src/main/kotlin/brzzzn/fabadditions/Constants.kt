@@ -5,7 +5,11 @@ import net.minecraft.util.Identifier
 object Constants {
     object NetworkChannel {
         private const val NETWORK_CHANNEL_BASE = "network_channel"
-        val PHANTOM_STAFF_S2C_PACKET_ID = Identifier("$NETWORK_CHANNEL_BASE.phantom_staff_s2c")
-        val PHANTOM_STAFF_C2S_PACKET_ID = Identifier("$NETWORK_CHANNEL_BASE.phantom_staff_c2s")
+        object PhantomStaff {
+            private const val PHANTOM_STAFF_CHANNEL = "$NETWORK_CHANNEL_BASE.phantom_staff"
+
+            val S2C_ITEM_USAGE_PACKET_ID = Identifier("$PHANTOM_STAFF_CHANNEL.item_usage_s2c")
+            val C2S_TARGET_PLAYER_SELECTED_PACKET_ID = Identifier("$NETWORK_CHANNEL_BASE.target_player_selected_c2s")
+        }
     }
 }
