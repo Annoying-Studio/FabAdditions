@@ -5,6 +5,7 @@ import brzzzn.fabadditions.FabAdditions.Companion.logger
 import brzzzn.fabadditions.entities.arrow.BombArrowEntity
 import brzzzn.fabadditions.entities.arrow.CopperArrowEntity
 import brzzzn.fabadditions.item.*
+import brzzzn.fabadditions.item.phantomstaff.PhantomStaff
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents

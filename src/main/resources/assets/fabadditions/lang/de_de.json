@@ -14,6 +14,9 @@
 
   "item.fabadditions.phantom_staff": "Phantom Stab",
   "item.fabadditions.phantom_staff.tooltip": "Erlaubt das Teleportieren zu anderen Spielern.",
+  "item.fabadditions.phantom_staff.message": "%s möchte sich zu dir teleportieren. (Nur innerhalb der nächsten 10 Sekunden möglich)",
+  "item.fabadditions.phantom_staff.message.accept": "[Akzeptieren]",
+  "item.fabadditions.phantom_staff.message.accept.hover": "Akzeptieren, dass sich der Spieler zu dir teleportiert",
 
   "item.fabadditions.copper_arrow": "Kupfer Pfeil",
   "item.fabadditions.copper_arrow.tooltip": "Kann einen Blitz während eines Gewitters erschaffen.",

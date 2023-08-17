@@ -14,6 +14,9 @@
 
   "item.fabadditions.phantom_staff": "Phantom Staff",
   "item.fabadditions.phantom_staff.tooltip": "Allows you to teleport to other Players.",
+  "item.fabadditions.phantom_staff.message": "%s wants to teleport to you. (only possible within the next 10 seconds)",
+  "item.fabadditions.phantom_staff.message.accept": "[Accept]",
+  "item.fabadditions.phantom_staff.message.accept.hover": "Accept that the player teleports to you",
 
   "item.fabadditions.copper_arrow": "Copper Arrow",
   "item.fabadditions.copper_arrow.tooltip": "May create a lightning during thunderstorms.",
