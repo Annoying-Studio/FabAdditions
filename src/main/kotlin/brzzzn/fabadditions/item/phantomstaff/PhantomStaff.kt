@@ -36,7 +36,7 @@ class PhantomStaff(settings: Settings) : Item(settings) {
 
     companion object {
         // Allows the player to teleport to himself -> only for debug purposes
-        private const val ALLOW_TELEPORT_TO_SELF = true
+        private const val ALLOW_TELEPORT_TO_SELF = false
         const val EXPERIENCE_COST: Int = 1
         const val COOLDOWN: Int = 240
     }
