@@ -1,15 +1,13 @@
 package brzzzn.fabadditions
 
-import brzzzn.fabadditions.registry.FabBlockEntityRegistry
-import brzzzn.fabadditions.registry.FabBlockRegistry
-import brzzzn.fabadditions.registry.FabEntityRegistry
-import brzzzn.fabadditions.registry.FabItemsRegistry
+import brzzzn.fabadditions.registry.*
 import net.fabricmc.api.ModInitializer
 import org.slf4j.LoggerFactory
 
 class FabAdditions : ModInitializer {
     override fun onInitialize()
     {
+        FabCommandRegistry.registerCommands()
         FabItemsRegistry.registerModItems()
         FabBlockRegistry.registerModBlocks()
         FabBlockEntityRegistry.registerModBlockEntities()
