@@ -20,6 +20,11 @@ repositories {
 	}
 }
 
+configurations {
+	includeInFinal
+}
+
+
 dependencies {
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
 	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
@@ -32,6 +37,7 @@ dependencies {
 	implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4"
 	implementation "com.google.code.gson:gson:2.10.1"
 	implementation "joda-time:joda-time:2.12.5"
+	includeInFinal "joda-time:joda-time:2.12.5"
 }
 
 processResources {
@@ -60,6 +66,13 @@ java {
 jar {
 	from("LICENSE") {
 		rename { "${it}_${project.base.archivesName.get()}"}
+	}
+	from("licenses") {
+		rename { "${it}_${project.base.archivesName.get()}"}
+	}
+	// Pack necessary dependencies
+	from {
+		configurations.includeInFinal.collect { it.isDirectory() ? it : zipTree(it) }
 	}
 }
 
