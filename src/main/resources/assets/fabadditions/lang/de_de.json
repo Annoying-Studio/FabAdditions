@@ -24,6 +24,12 @@
   "item.fabadditions.bomb_arrow": "Bomben Pfeil",
   "item.fabadditions.bomb_arrow.tooltip": "Erzeugt eine Explosion beim Einschlag",
 
+  "item.fabadditions.warp_staff": "Wandel Stab",
+  "item.fabadditions.warp_staff.tooltip": "Erlaubt das Speichern und teilen von Orten zu welchen man sich teleportieren kann.",
+
+  "item.fabadditions.pylon_staff": "Pylonen Stab",
+  "item.fabadditions.pylon_staff.tooltip": "Erlaubt das Speichern von mehreren Orten zu welchen man sich teleportieren kann.",
+
   "block.fabadditions.chunk_loader": "Chunk Lade-Block",
   "block.fabadditions.chunk_loader.tooltip": "Markiert den Chunk als Dauerhaften-Chunk."
 }

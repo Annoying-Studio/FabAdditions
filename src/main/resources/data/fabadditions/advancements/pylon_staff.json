@@ -1,0 +1,25 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "entered_nether": {
+      "trigger": "minecraft:nether_travel"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "fabadditions:pylon_staff"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "entered_nether",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "fabadditions:pylon_staff"
+    ]
+  }
+}

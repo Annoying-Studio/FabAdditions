@@ -24,6 +24,12 @@
   "item.fabadditions.bomb_arrow": "Bomb Arrow",
   "item.fabadditions.bomb_arrow.tooltip": "Explodes on impact.",
 
+  "item.fabadditions.warp_staff": "Warp Staff",
+  "item.fabadditions.warp_staff.tooltip": "Allows you to save and share locations that you and other players can teleport to.",
+
+  "item.fabadditions.pylon_staff": "Pylon Staff",
+  "item.fabadditions.pylon_staff.tooltip": "Allows you to save multiple locations that you can teleport to.",
+
   "block.fabadditions.chunk_loader": "Chunk Loader",
   "block.fabadditions.chunk_loader.tooltip": "Marks the Chunk as forced."
 }

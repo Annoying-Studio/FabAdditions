@@ -6,6 +6,8 @@ import brzzzn.fabadditions.entities.arrow.BombArrowEntity
 import brzzzn.fabadditions.entities.arrow.CopperArrowEntity
 import brzzzn.fabadditions.item.*
 import brzzzn.fabadditions.item.phantomstaff.PhantomStaff
+import brzzzn.fabadditions.item.warp.PylonStaff
+import brzzzn.fabadditions.item.warp.WarpStaff
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents
@@ -24,6 +26,56 @@ import net.minecraft.world.World
 
 
 object FabItemsRegistry {
+
+    private fun registerTools() {
+        // Amethyst Feather
+        registerItem(
+            "amethyst_feather",
+            AmethystFeather(rareToolSettings),
+            ItemGroups.TOOLS
+        )
+        // Interdimensional Feather
+        registerItem(
+            "interdimensional_feather",
+            InterdimensionalFeather(rareToolSettings),
+            ItemGroups.TOOLS
+        )
+        // Phantom staff
+        registerItem(
+            "phantom_staff",
+            PhantomStaff(rareToolSettings),
+            ItemGroups.TOOLS
+        )
+        // Warp Staff
+        registerItem(
+            "warp_staff",
+            WarpStaff(rareToolSettings),
+            ItemGroups.TOOLS
+        )
+        // Pylon Staff
+        registerItem(
+            "pylon_staff",
+            PylonStaff(rareToolSettings),
+            ItemGroups.TOOLS
+        )
+    }
+
+    private fun registerProjectiles()
+    {
+        //Copper Arrow
+        registerItem(
+            "copper_arrow",
+            COPPER_ARROW,
+            ItemGroups.COMBAT
+        )
+        registerDispenserBlockBehavior(COPPER_ARROW)
+
+        registerItem(
+            "bomb_arrow",
+            BOMB_ARROW,
+            ItemGroups.COMBAT,)
+        registerDispenserBlockBehavior(BOMB_ARROW)
+    }
 
     //region default settings
 
@@ -63,44 +115,6 @@ object FabItemsRegistry {
         registerProjectiles()
 
         logger.debug("Done registering Mod Items for ${FabAdditions.ID}")
-    }
-
-    private fun registerTools() {
-        // Amethyst Feather
-        registerItem(
-                "amethyst_feather",
-                AmethystFeather(rareToolSettings),
-                ItemGroups.TOOLS
-        )
-        // Interdimensional Feather
-        registerItem(
-                "interdimensional_feather",
-                InterdimensionalFeather(rareToolSettings),
-                ItemGroups.TOOLS
-        )
-        // Phantom staff
-        registerItem(
-                "phantom_staff",
-                PhantomStaff(rareToolSettings),
-                ItemGroups.TOOLS
-        )
-    }
-
-    private fun registerProjectiles()
-    {
-        //Copper Arrow
-        registerItem(
-            "copper_arrow",
-            COPPER_ARROW,
-            ItemGroups.COMBAT
-        )
-        registerDispenserBlockBehavior(COPPER_ARROW)
-
-        registerItem(
-            "bomb_arrow",
-            BOMB_ARROW,
-            ItemGroups.COMBAT,)
-        registerDispenserBlockBehavior(BOMB_ARROW)
     }
 
     private fun registerDispenserBlockBehavior(item: ArrowItem)
