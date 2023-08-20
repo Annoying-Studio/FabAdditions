@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " E ",
+    " N ",
+    " N "
+  ],
+  "key":
+  {
+    "E":
+    {
+      "item": "minecraft:end_crystal"
+    },
+    "N":
+    {
+      "item": "minecraft:netherite_ingot"
+    }
+  },
+  "result":
+  {
+    "item": "fabadditions:pylon_staff"
+  }
+}

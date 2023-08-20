@@ -1,7 +1,7 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "fabadditions:item/phantom_staff"
+    "layer0": "fabadditions:item/pylon_staff"
   },
   "display": {
     "thirdperson_righthand": {

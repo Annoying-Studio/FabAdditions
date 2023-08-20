@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " A ",
+    " Q ",
+    " Q "
+  ],
+  "key":
+  {
+    "Q":
+    {
+      "item": "minecraft:quartz"
+    },
+    "A":
+    {
+      "item": "minecraft:amethyst_shard"
+    }
+  },
+  "result":
+  {
+    "item": "fabadditions:warp_staff"
+  }
+}
