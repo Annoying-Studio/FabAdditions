@@ -5,7 +5,7 @@ import brzzzn.fabadditions.FabAdditions
 import brzzzn.fabadditions.data.PlayerList
 import brzzzn.fabadditions.data.PlayerRef
 import brzzzn.fabadditions.guis.phantomstaff.PhantomStaffGui
-import brzzzn.fabadditions.screens.PhantomStaffScreen
+import brzzzn.fabadditions.screens.FabAdditionsUiScreen
 import com.google.gson.Gson
 import kotlinx.coroutines.*
 import net.fabricmc.api.EnvType
@@ -129,7 +129,7 @@ class PhantomStaff(settings: Settings) : Item(settings) {
         FabAdditions.logger.debug(players.toString())
 
         // Create display screen
-        phantomStaffScreen = PhantomStaffScreen(PhantomStaffGui(players) {
+        phantomStaffScreen = FabAdditionsUiScreen(PhantomStaffGui(players) {
             // Code that runs when the player has selected another player
             ClientPlayNetworking.send(
                 Constants.NetworkChannel.PhantomStaff.C2S_TARGET_PLAYER_SELECTED_PACKET_ID,
