@@ -116,6 +116,7 @@ object WarpRepository {
                 }
             }
         }
+        saveCacheToDisk()
     }
 
     fun initializeCache(server: MinecraftServer) {
