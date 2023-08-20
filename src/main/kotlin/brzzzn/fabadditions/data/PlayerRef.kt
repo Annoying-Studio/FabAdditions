@@ -9,8 +9,4 @@ data class PlayerRef(
     val uuid: String
 ) {
     constructor(player: PlayerEntity) : this(player.name.string, player.uuidAsString)
-
-    constructor(player: ServerPlayerEntity) : this(player.name.string, player.uuidAsString)
-
-    constructor(player: ClientPlayerEntity) : this(player.name.string, player.uuidAsString)
 }

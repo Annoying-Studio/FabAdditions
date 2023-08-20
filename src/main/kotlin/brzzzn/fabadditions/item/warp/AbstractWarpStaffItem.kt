@@ -6,6 +6,7 @@ import brzzzn.fabadditions.data.PlayerRef
 import brzzzn.fabadditions.data.WarpPosition
 import brzzzn.fabadditions.framework.Vector2
 import brzzzn.fabadditions.framework.Vector3
+import brzzzn.fabadditions.framework.WorldRef
 import brzzzn.fabadditions.guis.warpstaff.WarpGui
 import brzzzn.fabadditions.item.warp.network.AddPosition
 import brzzzn.fabadditions.item.warp.network.DeleteWarp
@@ -97,7 +98,7 @@ abstract class AbstractWarpStaffItem(settings: Settings, private val warpType: W
                 Vector3(client.pos),
                 Vector2(client.rotationClient.x.toDouble(), client.rotationClient.y.toDouble()),
                 addPosition.positionName,
-                client.world.registryKey
+                WorldRef(client.world.registryKey)
             ),
             addPosition.type
         )
@@ -111,7 +112,7 @@ abstract class AbstractWarpStaffItem(settings: Settings, private val warpType: W
 
         fetchedWarp?.let { warp ->
             val targetWorldRegistryKey = server.worldRegistryKeys.firstOrNull {
-                it.value == warp.worldIdentifier.value
+                it.value.path == fetchedWarp.worldIdentifier.dimension && it.value.namespace == fetchedWarp.worldIdentifier.env
             }
 
             val targetWorld = server.getWorld(targetWorldRegistryKey)
@@ -123,7 +124,7 @@ abstract class AbstractWarpStaffItem(settings: Settings, private val warpType: W
                 FabAdditions.logger.debug("Loaded world: {}", world.registryKey?.value)
 
                 client.teleport(world, pos.x, pos.y, pos.z, rot.yaw.toFloat(), rot.pitch.toFloat())
-            } ?: FabAdditions.logger.error("There is no World for ${warp.worldIdentifier.value.namespace}")
+            } ?: FabAdditions.logger.error("There is no World for ${warp.worldIdentifier.env} ${warp.worldIdentifier.dimension}")
         } ?: FabAdditions.logger.error("There is no warp for ID: ${request.requestedPositionId} fro type: ${request.type}")
     }
 
@@ -195,9 +196,21 @@ abstract class AbstractWarpStaffItem(settings: Settings, private val warpType: W
         // Check that player is server player
         if (user !is ServerPlayerEntity) return super.use(world, user, hand)
 
-        WarpRepository.initializeCache(user.server)
+        world?.server?.let {
+            WarpRepository.initializeCache(it)
+        }
 
         val warps = getWarps(user)
+
+        val openStaff = OpenStaff(
+            WarpRepository.maxAllowedWarps[warpType] ?: 0,
+            warpType,
+            warps
+        )
+
+        val str = Gson().toJson(
+            openStaff
+        )
 
         ServerPlayNetworking.send(
             user,
@@ -205,13 +218,7 @@ abstract class AbstractWarpStaffItem(settings: Settings, private val warpType: W
             PacketByteBufs
                 .create()
                 .writeString(
-                    Gson().toJson(
-                        OpenStaff(
-                            WarpRepository.maxAllowedWarps[warpType] ?: 0,
-                            warpType,
-                            warps
-                        )
-                    )
+                    str
                 )
         )
 
