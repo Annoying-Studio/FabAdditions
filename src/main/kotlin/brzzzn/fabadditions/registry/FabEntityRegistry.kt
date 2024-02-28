@@ -18,12 +18,13 @@ object FabEntityRegistry
         "copper_arrow",
         FabricEntityTypeBuilder.create(SpawnGroup.MISC, ::CopperArrowEntity)
             .dimensions(EntityDimensions.fixed(0.5f, 0.5f))
-            .trackRangeBlocks(4).trackedUpdateRate(20).build()
+            .trackRangeBlocks(4).trackedUpdateRate(20)
+            .build()
     )
 
     val BOMB_ARROW = registerEntity(
         "bomb_arrow",
-        FabricEntityTypeBuilder.create(SpawnGroup.MISC, ::BombArrowEntity)
+        FabricEntityTypeBuilder.create<BombArrowEntity>(SpawnGroup.MISC, ::BombArrowEntity)
             .dimensions(EntityDimensions.fixed(0.5f, 0.5f))
             .trackRangeBlocks(4).trackedUpdateRate(20).build()
     )

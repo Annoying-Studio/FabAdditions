@@ -16,9 +16,11 @@ import net.minecraft.world.event.GameEvent
 
 class BombArrowEntity : PersistentProjectileEntity
 {
-    constructor(entityType: EntityType<out BombArrowEntity?>?, world: World?) : super(entityType as EntityType<out PersistentProjectileEntity?>?, world)
-    constructor(x:Double, y:Double, z:Double, world: World) : super(FabEntityRegistry.BOMB_ARROW, x,y,z,world)
-    constructor(owner: LivingEntity, world: World) : super(FabEntityRegistry.BOMB_ARROW, owner,world)
+    constructor(entityType: EntityType<out BombArrowEntity?>?, world: World?)
+        : super(entityType as EntityType<out PersistentProjectileEntity?>?, world, ITEM_STACK
+    )
+    constructor(x:Double, y:Double, z:Double, world: World) : super(FabEntityRegistry.BOMB_ARROW, x,y,z,world, ITEM_STACK)
+    constructor(owner: LivingEntity, world: World) : super(FabEntityRegistry.BOMB_ARROW, owner,world, ITEM_STACK)
 
     private val explosionPower = 2.5f
 
@@ -99,5 +101,9 @@ class BombArrowEntity : PersistentProjectileEntity
     {
         world.createExplosion(this, this.x, this.y, this.z, explosionPower, World.ExplosionSourceType.NONE)
         this.discard()
+    }
+
+    companion object {
+        val ITEM_STACK = ItemStack(FabItemsRegistry.BOMB_ARROW)
     }
 }
