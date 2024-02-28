@@ -123,22 +123,23 @@ object FabItemsRegistry {
         {
             override fun createProjectile(world: World, position: Position, stack: ItemStack?): ProjectileEntity?
             {
-                if(item is CopperArrowItem)
-                {
-                    val arrowEntity = CopperArrowEntity(position.x, position.y, position.z, world)
-                    arrowEntity.pickupType = PersistentProjectileEntity.PickupPermission.ALLOWED
+                when (item) {
+                    is CopperArrowItem -> {
+                        val arrowEntity = CopperArrowEntity(position.x, position.y, position.z, world)
+                        arrowEntity.pickupType = PersistentProjectileEntity.PickupPermission.ALLOWED
 
-                    return arrowEntity
-                }
-                else if(item is BombArrowItem)
-                {
-                    val arrowEntity = BombArrowEntity(position.x, position.y, position.z, world)
-                    arrowEntity.pickupType = PersistentProjectileEntity.PickupPermission.DISALLOWED
+                        return arrowEntity
+                    }
 
-                    return arrowEntity
+                    is BombArrowItem -> {
+                        val arrowEntity = BombArrowEntity(position.x, position.y, position.z, world)
+                        arrowEntity.pickupType = PersistentProjectileEntity.PickupPermission.DISALLOWED
+
+                        return arrowEntity
+                    }
+
+                    else -> return null
                 }
-                else
-                    return null
             }
         })
     }

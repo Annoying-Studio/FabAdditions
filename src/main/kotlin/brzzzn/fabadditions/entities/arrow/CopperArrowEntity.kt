@@ -5,6 +5,7 @@ import brzzzn.fabadditions.registry.FabItemsRegistry
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.projectile.PersistentProjectileEntity
+import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.particle.ParticleTypes
 import net.minecraft.util.hit.BlockHitResult
@@ -19,9 +20,10 @@ import net.minecraft.world.event.GameEvent
 
 class CopperArrowEntity : PersistentProjectileEntity
 {
-    constructor(entityType: EntityType<out CopperArrowEntity?>?, world: World?) : super(entityType as EntityType<out PersistentProjectileEntity?>?, world)
-    constructor(x:Double, y:Double, z:Double, world: World) : super(FabEntityRegistry.COPPER_ARROW, x,y,z,world)
-    constructor(owner: LivingEntity, world: World) : super(FabEntityRegistry.COPPER_ARROW, owner,world)
+    constructor(entityType: EntityType<out CopperArrowEntity?>?, world: World?)
+        : super(entityType as EntityType<out PersistentProjectileEntity?>?, world, ITEM_STACK)
+    constructor(x:Double, y:Double, z:Double, world: World) : super(FabEntityRegistry.COPPER_ARROW, x,y,z,world, ITEM_STACK)
+    constructor(owner: LivingEntity, world: World) : super(FabEntityRegistry.COPPER_ARROW, owner,world, ITEM_STACK)
 
     private val lightningSpawnChance:Int = 25
 
@@ -111,5 +113,9 @@ class CopperArrowEntity : PersistentProjectileEntity
                 this.discard()
             }
         }
+    }
+
+    companion object {
+        val ITEM_STACK = ItemStack(FabItemsRegistry.COPPER_ARROW)
     }
 }
