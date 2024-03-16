@@ -78,7 +78,7 @@ class PhantomStaff(settings: Settings) : Item(settings) {
         for (worldInstance in world?.server?.worlds ?: listOf()) {
             players.players.addAll(
                 worldInstance.players.map {
-                    PlayerRef(it.displayName?.string ?: "", it.uuid.toString())
+                    PlayerRef(it.displayName.string, it.uuid.toString())
                 }
             )
         }
@@ -195,6 +195,11 @@ class PhantomStaff(settings: Settings) : Item(settings) {
                         .withBold(true)
                         .withColor(
                             TextColor.fromFormatting(Formatting.GREEN)
+                        )
+                        .withHoverEvent(
+                            HoverEvent.Action.SHOW_TEXT.buildHoverEvent(
+                                Text.translatable("item.fabadditions.phantom_staff.message.accept.hover")
+                            )
                         )
                         .withClickEvent(
                             ClickEvent(

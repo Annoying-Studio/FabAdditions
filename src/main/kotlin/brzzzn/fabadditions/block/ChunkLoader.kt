@@ -1,8 +1,10 @@
 package brzzzn.fabadditions.block
 
 import brzzzn.fabadditions.block.entity.ChunkLoaderBlockEntity
-import com.mojang.serialization.MapCodec
-import net.minecraft.block.*
+import net.minecraft.block.BlockEntityProvider
+import net.minecraft.block.BlockRenderType
+import net.minecraft.block.BlockState
+import net.minecraft.block.BlockWithEntity
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.client.gui.screen.Screen
 import net.minecraft.client.item.TooltipContext
@@ -20,8 +22,6 @@ class ChunkLoader(settings: Settings?) : BlockWithEntity(settings), BlockEntityP
     {
         return BlockRenderType.MODEL
     }
-
-    override fun getCodec(): MapCodec<out BlockWithEntity> = CODEC
 
     override fun onBlockAdded(state: BlockState, world: World, pos: BlockPos?, oldState: BlockState, notify: Boolean)
     {
@@ -64,9 +64,5 @@ class ChunkLoader(settings: Settings?) : BlockWithEntity(settings), BlockEntityP
         {
             tooltip.add(Text.translatable("tooltip.fabadditions.hold_shift").formatted(Formatting.GRAY))
         }
-    }
-
-    companion object {
-        val CODEC = createCodec { settings: Settings? -> ChunkLoader(settings) };
     }
 }
