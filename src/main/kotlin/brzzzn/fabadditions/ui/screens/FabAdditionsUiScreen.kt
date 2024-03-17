@@ -1,4 +1,4 @@
-package brzzzn.fabadditions.screens
+package brzzzn.fabadditions.ui.screens
 
 import io.github.cottonmc.cotton.gui.GuiDescription
 import io.github.cottonmc.cotton.gui.client.CottonClientScreen
