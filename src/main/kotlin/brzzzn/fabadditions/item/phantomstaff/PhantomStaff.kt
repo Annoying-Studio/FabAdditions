@@ -4,8 +4,8 @@ import brzzzn.fabadditions.Constants
 import brzzzn.fabadditions.FabAdditions
 import brzzzn.fabadditions.data.PlayerList
 import brzzzn.fabadditions.data.PlayerRef
-import brzzzn.fabadditions.guis.phantomstaff.PhantomStaffGui
-import brzzzn.fabadditions.screens.FabAdditionsUiScreen
+import brzzzn.fabadditions.ui.guis.phantomstaff.PhantomStaffGui
+import brzzzn.fabadditions.ui.screens.FabAdditionsUiScreen
 import com.google.gson.Gson
 import kotlinx.coroutines.*
 import net.fabricmc.api.EnvType

@@ -1,4 +1,4 @@
-package brzzzn.fabadditions.guis.warpstaff
+package brzzzn.fabadditions.ui.guis.warpstaff
 
 import brzzzn.fabadditions.data.PlayerRef
 import brzzzn.fabadditions.data.WarpPosition
@@ -7,7 +7,7 @@ import io.github.cottonmc.cotton.gui.widget.*
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 
-class PlayerWarpCollection : WPlainPanel() {
+class PlayerWarpEntry : WPlainPanel() {
 
     fun create(
         player: PlayerRef,
