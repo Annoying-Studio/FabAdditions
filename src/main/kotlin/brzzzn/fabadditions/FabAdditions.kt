@@ -12,6 +12,7 @@ class FabAdditions : ModInitializer {
         FabBlockRegistry.registerModBlocks()
         FabBlockEntityRegistry.registerModBlockEntities()
         FabEntityRegistry.registerModEntities()
+        FabEventRegistry.registerEvents()
     }
 
     companion object {

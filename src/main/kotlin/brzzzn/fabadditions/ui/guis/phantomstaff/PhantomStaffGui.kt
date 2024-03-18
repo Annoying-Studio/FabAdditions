@@ -1,4 +1,4 @@
-package brzzzn.fabadditions.ui.screens.guis.phantomstaff
+package brzzzn.fabadditions.ui.guis.phantomstaff
 
 import brzzzn.fabadditions.data.PlayerList
 import brzzzn.fabadditions.data.PlayerRef

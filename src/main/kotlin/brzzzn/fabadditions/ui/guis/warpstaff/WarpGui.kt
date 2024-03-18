@@ -1,4 +1,4 @@
-package brzzzn.fabadditions.ui.screens.guis.warpstaff
+package brzzzn.fabadditions.ui.guis.warpstaff
 
 import brzzzn.fabadditions.data.PlayerRef
 import brzzzn.fabadditions.data.WarpPosition

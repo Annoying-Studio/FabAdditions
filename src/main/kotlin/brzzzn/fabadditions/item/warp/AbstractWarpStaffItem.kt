@@ -7,7 +7,7 @@ import brzzzn.fabadditions.data.WarpPosition
 import brzzzn.fabadditions.framework.Vector2
 import brzzzn.fabadditions.framework.Vector3
 import brzzzn.fabadditions.framework.WorldRef
-import brzzzn.fabadditions.ui.screens.guis.warpstaff.WarpGui
+import brzzzn.fabadditions.ui.guis.warpstaff.WarpGui
 import brzzzn.fabadditions.item.warp.network.AddPosition
 import brzzzn.fabadditions.item.warp.network.DeleteWarp
 import brzzzn.fabadditions.item.warp.network.OpenStaff
