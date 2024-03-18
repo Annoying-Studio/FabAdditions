@@ -7,7 +7,7 @@ import io.github.cottonmc.cotton.gui.widget.*
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 
-class PlayerWarpCollection : WPlainPanel() {
+class PlayerWarpEntry : WPlainPanel() {
 
     fun create(
         player: PlayerRef,

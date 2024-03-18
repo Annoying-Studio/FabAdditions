@@ -73,8 +73,8 @@ class WarpGui(
             }
         }
 
-        val warpList = WScrollPanel(
-            WarpList(
+        val playerWarpList = WScrollPanel(
+            PlayerWarpList(
                 warps,
                 self,
                 onSelectWarp,
@@ -83,8 +83,8 @@ class WarpGui(
             )
         )
 
-        warpList.setScrollingHorizontally(TriState.FALSE)
-        warpList.setScrollingVertically(TriState.DEFAULT)
+        playerWarpList.setScrollingHorizontally(TriState.FALSE)
+        playerWarpList.setScrollingVertically(TriState.DEFAULT)
 
         root.add(
             topLabel,
@@ -95,7 +95,7 @@ class WarpGui(
         )
 
         root.add(
-            warpList,
+            playerWarpList,
             1,
             2,
             15,
