@@ -68,7 +68,7 @@ jar {
 		rename { "${it}_${project.base.archivesName.get()}"}
 	}
 	from("licenses") {
-		rename { "${it}_${project.base.archivesName.get()}"}
+		rename { "${it}"}
 	}
 	// Pack necessary dependencies
 	from {
