@@ -87,7 +87,7 @@ abstract class AbstractWarpStaffItem(settings: Settings, private val warpType: W
         // Verify that player is not creating more teleports than necessary
         val playerWarps = WarpRepository.getWarpsFromPlayer(PlayerRef(client), addPosition.type)
 
-        if (playerWarps.warps.size >= (WarpRepository.maxAllowedWarps[addPosition.type] ?: 0)) {
+        if (playerWarps.warps.size >= (WarpRepository.getWarpLimit(addPosition.type))) {
             FabAdditions.logger.info("Player: ${PlayerRef(client)} tried to request a new warp but has no teleports left")
             return
         }
@@ -203,7 +203,7 @@ abstract class AbstractWarpStaffItem(settings: Settings, private val warpType: W
         val warps = getWarps(user)
 
         val openStaff = OpenStaff(
-            WarpRepository.maxAllowedWarps[warpType] ?: 0,
+            WarpRepository.getWarpLimit(warpType),
             warpType,
             warps
         )
