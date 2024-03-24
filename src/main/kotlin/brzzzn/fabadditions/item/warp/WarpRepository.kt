@@ -17,11 +17,6 @@ object WarpRepository {
     const val saveFile = "Warps.json"
     private var currentPath: Path? = null
 
-    val maxAllowedWarps: Map<WarpType, Int> = mapOf(
-        WarpType.WARP to 2,
-        WarpType.PYLON to 3
-    )
-
     private val gson = GsonBuilder()
         .setPrettyPrinting()
         .create()
@@ -99,6 +94,8 @@ object WarpRepository {
         return null
     }
 
+    fun getWarpLimit(type: WarpType): Int = cache?.maxWarps?.getOrDefault(type, null) ?: 2
+
     fun deleteWarp(player: PlayerRef, identifier: String, type: WarpType) {
         cache?.let { save ->
             val warpCollection = when (type) {
@@ -148,6 +145,10 @@ object WarpRepository {
 
     private fun generateEmptyCache() {
         cache = WarpSave(
+            mapOf(
+                WarpType.WARP to 2,
+                WarpType.PYLON to 3
+            ),
             hashSetOf(),
             hashSetOf()
         )

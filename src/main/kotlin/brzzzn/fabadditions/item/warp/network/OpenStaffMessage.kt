@@ -1,10 +1,9 @@
 package brzzzn.fabadditions.item.warp.network
 
-import brzzzn.fabadditions.data.WarpPosition
 import brzzzn.fabadditions.item.warp.PlayerWarps
 import brzzzn.fabadditions.item.warp.WarpType
 
-data class OpenStaff (
+data class OpenStaffMessage (
     /**
      * Max number of warps allowed for the current player
      */
