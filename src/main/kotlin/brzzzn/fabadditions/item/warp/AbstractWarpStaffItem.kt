@@ -8,10 +8,10 @@ import brzzzn.fabadditions.framework.Vector2
 import brzzzn.fabadditions.framework.Vector3
 import brzzzn.fabadditions.framework.WorldRef
 import brzzzn.fabadditions.ui.guis.warpstaff.WarpGui
-import brzzzn.fabadditions.item.warp.network.AddPosition
-import brzzzn.fabadditions.item.warp.network.DeleteWarp
-import brzzzn.fabadditions.item.warp.network.OpenStaff
-import brzzzn.fabadditions.item.warp.network.RequestTeleport
+import brzzzn.fabadditions.item.warp.network.AddPositionMessage
+import brzzzn.fabadditions.item.warp.network.DeleteWarpMessage
+import brzzzn.fabadditions.item.warp.network.OpenStaffMessage
+import brzzzn.fabadditions.item.warp.network.RequestTeleportMessage
 import brzzzn.fabadditions.ui.screens.FabAdditionsUiScreen
 import com.google.gson.Gson
 import net.fabricmc.api.EnvType
@@ -52,7 +52,7 @@ abstract class AbstractWarpStaffItem(settings: Settings, private val warpType: W
         ClientPlayNetworking.registerGlobalReceiver(
             Constants.NetworkChannel.Warp.S2C_STAFF_ITEM_USAGE_PACKET_ID
         ) { client, _, buf, _ ->
-            val obj = Gson().fromJson(buf.readString(), OpenStaff::class.java)
+            val obj = Gson().fromJson(buf.readString(), OpenStaffMessage::class.java)
             onServerReportItemUsage(client, obj)
         }
     }
@@ -62,32 +62,32 @@ abstract class AbstractWarpStaffItem(settings: Settings, private val warpType: W
         ServerPlayNetworking.registerGlobalReceiver(
             Constants.NetworkChannel.Warp.C2S_WARP_ADD_PACKET_ID
         ) { server, client, _, buf, _ ->
-            val obj = Gson().fromJson(buf.readString(), AddPosition::class.java)
+            val obj = Gson().fromJson(buf.readString(), AddPositionMessage::class.java)
             onClientAddWarp(server, client, obj)
         }
 
         ServerPlayNetworking.registerGlobalReceiver(
             Constants.NetworkChannel.Warp.C2S_WARP_REQUEST_PACKET_ID
         ) { server, client, _, buf, _ ->
-            val obj = Gson().fromJson(buf.readString(), RequestTeleport::class.java)
+            val obj = Gson().fromJson(buf.readString(), RequestTeleportMessage::class.java)
             onClientRequestWarp(server, client, obj)
         }
 
         ServerPlayNetworking.registerGlobalReceiver(
             Constants.NetworkChannel.Warp.C2S_WARP_DELETE_PACKET_ID
         ) { _, client, _, buf, _ ->
-            val obj = Gson().fromJson(buf.readString(), DeleteWarp::class.java)
+            val obj = Gson().fromJson(buf.readString(), DeleteWarpMessage::class.java)
             onClientRequestDelete(client, obj)
         }
     }
 
-    private fun onClientAddWarp(server: MinecraftServer, client: ServerPlayerEntity, addPosition: AddPosition) {
+    private fun onClientAddWarp(server: MinecraftServer, client: ServerPlayerEntity, addPositionMessage: AddPositionMessage) {
         WarpRepository.initializeCache(server)
 
         // Verify that player is not creating more teleports than necessary
-        val playerWarps = WarpRepository.getWarpsFromPlayer(PlayerRef(client), addPosition.type)
+        val playerWarps = WarpRepository.getWarpsFromPlayer(PlayerRef(client), addPositionMessage.type)
 
-        if (playerWarps.warps.size >= (WarpRepository.getWarpLimit(addPosition.type))) {
+        if (playerWarps.warps.size >= (WarpRepository.getWarpLimit(addPositionMessage.type))) {
             FabAdditions.logger.info("Player: ${PlayerRef(client)} tried to request a new warp but has no teleports left")
             return
         }
@@ -96,19 +96,19 @@ abstract class AbstractWarpStaffItem(settings: Settings, private val warpType: W
             PlayerRef(client),
             WarpPosition(
                 Vector3(client.pos),
-                Vector2(client.rotationClient.x.toDouble(), client.rotationClient.y.toDouble()),
-                addPosition.positionName,
+                Vector2(client.yaw.toDouble(), client.pitch.toDouble()),
+                addPositionMessage.positionName,
                 WorldRef(client.world.registryKey)
             ),
-            addPosition.type
+            addPositionMessage.type
         )
     }
 
-    private fun onClientRequestWarp(server: MinecraftServer, client: ServerPlayerEntity, request: RequestTeleport) {
+    private fun onClientRequestWarp(server: MinecraftServer, client: ServerPlayerEntity, requestTeleportMessage: RequestTeleportMessage) {
         // FIXME: Validate teleport
         // TODO: Add effects
 
-        val fetchedWarp = WarpRepository.getWarp(request.requestedPositionId, request.type)
+        val fetchedWarp = WarpRepository.getWarp(requestTeleportMessage.requestedPositionId, requestTeleportMessage.type)
 
         fetchedWarp?.let { warp ->
             val targetWorldRegistryKey = server.worldRegistryKeys.firstOrNull {
@@ -125,40 +125,40 @@ abstract class AbstractWarpStaffItem(settings: Settings, private val warpType: W
 
                 client.teleport(world, pos.x, pos.y, pos.z, rot.yaw.toFloat(), rot.pitch.toFloat())
             } ?: FabAdditions.logger.error("There is no World for ${warp.worldIdentifier.env} ${warp.worldIdentifier.dimension}")
-        } ?: FabAdditions.logger.error("There is no warp for ID: ${request.requestedPositionId} fro type: ${request.type}")
+        } ?: FabAdditions.logger.error("There is no warp for ID: ${requestTeleportMessage.requestedPositionId} fro type: ${requestTeleportMessage.type}")
     }
 
-    private fun onClientRequestDelete(client: ServerPlayerEntity, delete: DeleteWarp) {
+    private fun onClientRequestDelete(client: ServerPlayerEntity, delete: DeleteWarpMessage) {
         WarpRepository.deleteWarp(PlayerRef(client), delete.warp.uniqueId, delete.type)
     }
 
-    private fun onServerReportItemUsage(client: MinecraftClient, openStaff: OpenStaff) {
+    private fun onServerReportItemUsage(client: MinecraftClient, openStaffMessage: OpenStaffMessage) {
         client.player?.let { player ->
             screen = FabAdditionsUiScreen(WarpGui(
-                openStaff.displayedWarpPositions,
-                PlayerRef(player),
-                {
+                warps = openStaffMessage.displayedWarpPositions,
+                self = PlayerRef(player),
+                onSelectWarp = { warpPosition ->
                     ClientPlayNetworking.send(
                         Constants.NetworkChannel.Warp.C2S_WARP_REQUEST_PACKET_ID,
                         PacketByteBufs.create().writeString(
                             Gson().toJson(
-                                RequestTeleport(
-                                    it.uniqueId,
-                                    openStaff.type
+                                RequestTeleportMessage(
+                                    warpPosition.uniqueId,
+                                    openStaffMessage.type
                                 )
                             )
                         )
                     )
                     client.execute { screen?.close() }
                 },
-                {
+                onAddWarp = { warpName ->
                     ClientPlayNetworking.send(
                         Constants.NetworkChannel.Warp.C2S_WARP_ADD_PACKET_ID,
                         PacketByteBufs.create().writeString(
                             Gson().toJson(
-                                AddPosition(
-                                    it,
-                                    openStaff.type
+                                AddPositionMessage(
+                                    warpName,
+                                    openStaffMessage.type
                                 )
                             )
                         )
@@ -166,17 +166,22 @@ abstract class AbstractWarpStaffItem(settings: Settings, private val warpType: W
                     // TODO: Make view update
                     client.execute { screen?.close() }
                 },
-                {
+                onDeleteWarp = { deletedWarpPosition ->
                     ClientPlayNetworking.send(
                         Constants.NetworkChannel.Warp.C2S_WARP_DELETE_PACKET_ID,
                         PacketByteBufs.create().writeString(
-                            Gson().toJson(DeleteWarp(it, openStaff.type))
+                            Gson().toJson(
+                                DeleteWarpMessage(
+                                    deletedWarpPosition,
+                                    openStaffMessage.type
+                                )
+                            )
                         )
                     )
                     // TODO: Make view update
                     client.execute { screen?.close() }
                 },
-                {
+                onClose = {
                     client.execute { screen?.close() }
                 }
             ))
@@ -202,14 +207,14 @@ abstract class AbstractWarpStaffItem(settings: Settings, private val warpType: W
 
         val warps = getWarps(user)
 
-        val openStaff = OpenStaff(
+        val openStaffMessage = OpenStaffMessage(
             WarpRepository.getWarpLimit(warpType),
             warpType,
             warps
         )
 
         val str = Gson().toJson(
-            openStaff
+            openStaffMessage
         )
 
         ServerPlayNetworking.send(
