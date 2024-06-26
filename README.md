@@ -24,9 +24,8 @@ This project is licensed under the MIT License and thus can be used freely in ac
 The MIT License is found in the LICENSE file at the root of this project.
 
 #### The following libraries are used in this project:
-- LibGui (MIT-License)
-- Gson (APACHE 2.0 License)
-- Joda-Time (APACHE 2.0 License)
-- Exposed (APACHE 2.0 License)
+- LibGui
+- Gson
+- Joda-Time
 
 The Licenses of each Library can be found in the ./liceses folder within this project. For each Library it contains a Folder containing the License files.
