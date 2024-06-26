@@ -1,11 +1,11 @@
-package brzzzn.fabadditions.guis.warpstaff
+package brzzzn.fabadditions.ui.guis.warpstaff
 
 import brzzzn.fabadditions.data.PlayerRef
 import brzzzn.fabadditions.data.WarpPosition
 import brzzzn.fabadditions.item.warp.PlayerWarps
 import io.github.cottonmc.cotton.gui.widget.WPlainPanel
 
-class WarpList(
+class PlayerWarpList(
     /**
      * Set of all warps that the server allowed to be displayed
      */
@@ -28,8 +28,11 @@ class WarpList(
 
     init {
         var currentHeight = 0
-        for (warp in warps.sortedBy { it.player.name }) {
-            val collection = PlayerWarpCollection()
+        warps
+            .sortedBy { warpEntry -> warpEntry.player.name }
+            .sortedBy { warpEntry -> warpEntry.player.name != self.name }
+            .forEach { warp ->
+            val collection = PlayerWarpEntry()
             collection.create(
                 self,
                 warp,

@@ -4,8 +4,8 @@ import brzzzn.fabadditions.Constants
 import brzzzn.fabadditions.FabAdditions
 import brzzzn.fabadditions.data.PlayerList
 import brzzzn.fabadditions.data.PlayerRef
-import brzzzn.fabadditions.guis.phantomstaff.PhantomStaffGui
-import brzzzn.fabadditions.screens.FabAdditionsUiScreen
+import brzzzn.fabadditions.ui.guis.phantomstaff.PhantomStaffGui
+import brzzzn.fabadditions.ui.screens.FabAdditionsUiScreen
 import com.google.gson.Gson
 import kotlinx.coroutines.*
 import net.fabricmc.api.EnvType
@@ -47,7 +47,7 @@ class PhantomStaff(settings: Settings) : Item(settings) {
                 setupClientNetworkPackets()
             }
 
-            else -> { }
+            else -> {}
         }
 
         // Always register to work on servers and in single-player
@@ -67,8 +67,7 @@ class PhantomStaff(settings: Settings) : Item(settings) {
         if (user !is ServerPlayerEntity) return super.use(world, user, hand)
 
         // stop if the player does not have enough xp
-        if(user.experienceLevel < EXPERIENCE_COST)
-        {
+        if (user.experienceLevel < EXPERIENCE_COST) {
             user.sendMessage(Text.translatable("chat.fabadditions.not_enough_xp").formatted(Formatting.RED))
             return super.use(world, user, hand)
         }
@@ -129,16 +128,21 @@ class PhantomStaff(settings: Settings) : Item(settings) {
         FabAdditions.logger.debug(players.toString())
 
         // Create display screen
-        phantomStaffScreen = FabAdditionsUiScreen(PhantomStaffGui(players) {
-            // Code that runs when the player has selected another player
-            ClientPlayNetworking.send(
-                Constants.NetworkChannel.PhantomStaff.C2S_TARGET_PLAYER_SELECTED_PACKET_ID,
-                PacketByteBufs.create().writeString(it.uuid)
+        phantomStaffScreen = FabAdditionsUiScreen(
+            PhantomStaffGui(
+                players,
+                teleportLambda = {
+                    // Code that runs when the player has selected another player
+                    ClientPlayNetworking.send(
+                        Constants.NetworkChannel.PhantomStaff.C2S_TARGET_PLAYER_SELECTED_PACKET_ID,
+                        PacketByteBufs.create().writeString(it.uuid)
+                    )
+                    client.execute {
+                        phantomStaffScreen?.close()
+                    }
+                }
             )
-            client.execute {
-                phantomStaffScreen?.close()
-            }
-        })
+        )
         client.execute {
             client.setScreen(phantomStaffScreen)
         }
@@ -184,7 +188,7 @@ class PhantomStaff(settings: Settings) : Item(settings) {
      * @param user The [PlayerEntity] that wants to teleport to the [player]
      * @param player The target of the teleport
      */
-    private fun sendChatMessageOnTargetPlayer(user:PlayerEntity, player: PlayerEntity) {
+    private fun sendChatMessageOnTargetPlayer(user: PlayerEntity, player: PlayerEntity) {
         player.sendMessage(
             Text.translatable("item.fabadditions.phantom_staff.message", user.name.string)
         )

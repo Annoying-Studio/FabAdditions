@@ -1,4 +1,4 @@
-package brzzzn.fabadditions.guis.warpstaff
+package brzzzn.fabadditions.ui.guis.warpstaff
 
 import brzzzn.fabadditions.data.PlayerRef
 import brzzzn.fabadditions.data.WarpPosition
@@ -9,6 +9,7 @@ import io.github.cottonmc.cotton.gui.widget.WGridPanel
 import io.github.cottonmc.cotton.gui.widget.WLabel
 import io.github.cottonmc.cotton.gui.widget.WScrollPanel
 import io.github.cottonmc.cotton.gui.widget.WTextField
+import io.github.cottonmc.cotton.gui.widget.data.InputResult
 import net.fabricmc.fabric.api.util.TriState
 import net.minecraft.text.Text
 
@@ -73,18 +74,22 @@ class WarpGui(
             }
         }
 
-        val warpList = WScrollPanel(
-            WarpList(
+        val playerWarpList = object : WScrollPanel(
+            PlayerWarpList(
                 warps,
                 self,
                 onSelectWarp,
                 onDeleteWarp,
                 15
             )
-        )
+        ) {
+            override fun onMouseScroll(x: Int, y: Int, amount: Double): InputResult {
+                return super.onMouseScroll(x, y, amount * 2)
+            }
+        }
 
-        warpList.setScrollingHorizontally(TriState.FALSE)
-        warpList.setScrollingVertically(TriState.DEFAULT)
+        playerWarpList.setScrollingHorizontally(TriState.FALSE)
+        playerWarpList.setScrollingVertically(TriState.DEFAULT)
 
         root.add(
             topLabel,
@@ -95,7 +100,7 @@ class WarpGui(
         )
 
         root.add(
-            warpList,
+            playerWarpList,
             1,
             2,
             15,
