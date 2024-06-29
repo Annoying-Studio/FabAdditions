@@ -2,8 +2,10 @@ package brzzzn.fabadditions.item.phantomstaff
 
 import brzzzn.fabadditions.Constants
 import brzzzn.fabadditions.FabAdditions
+import brzzzn.fabadditions.FabAdditions.Companion.logger
 import brzzzn.fabadditions.data.PlayerList
 import brzzzn.fabadditions.data.PlayerRef
+import brzzzn.fabadditions.item.phantomstaff.packets.PhantomStaffItemUsagePayload
 import brzzzn.fabadditions.ui.guis.phantomstaff.PhantomStaffGui
 import brzzzn.fabadditions.ui.screens.FabAdditionsUiScreen
 import com.google.gson.Gson
@@ -15,10 +17,10 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking
 import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.gui.screen.Screen
-import net.minecraft.client.item.TooltipContext
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
+import net.minecraft.item.tooltip.TooltipType
 import net.minecraft.server.MinecraftServer
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.text.*
@@ -89,12 +91,11 @@ class PhantomStaff(settings: Settings) : Item(settings) {
             }
         }
 
-        val string = Gson().toJson(players)
+        val playerList = Gson().toJson(players)
 
         ServerPlayNetworking.send(
             user,
-            Constants.NetworkChannel.PhantomStaff.S2C_ITEM_USAGE_PACKET_ID,
-            PacketByteBufs.create().writeString(string)
+            PhantomStaffItemUsagePayload(playerList)
         )
 
         return super.use(world, user, hand)
@@ -103,9 +104,11 @@ class PhantomStaff(settings: Settings) : Item(settings) {
     private fun setupClientNetworkPackets() {
         // Client logic in response to server packet
         ClientPlayNetworking.registerGlobalReceiver(
-            Constants.NetworkChannel.PhantomStaff.S2C_ITEM_USAGE_PACKET_ID
-        ) { client, _, buf, _ ->
-            onReceivedItemUsageFromServer(client, buf.readString())
+            PhantomStaffItemUsagePayload.ID
+        ) { payLoad, context ->
+            payLoad.players?.let {
+                onReceivedItemUsageFromServer(context.client(), it)
+            } ?: logger.warn("Received empty payload from server")
         }
     }
 
@@ -210,12 +213,17 @@ class PhantomStaff(settings: Settings) : Item(settings) {
         )
     }
 
-    override fun appendTooltip(stack: ItemStack?, world: World?, tooltip: MutableList<Text>?, context: TooltipContext?) {
+    override fun appendTooltip(
+        stack: ItemStack?,
+        context: TooltipContext?,
+        tooltip: MutableList<Text>?,
+        type: TooltipType?
+    ) {
         if (Screen.hasShiftDown()) {
             tooltip?.add(Text.translatable("item.fabadditions.phantom_staff.tooltip").formatted(Formatting.GRAY))
         } else {
             tooltip?.add(Text.translatable("tooltip.fabadditions.hold_shift").formatted(Formatting.GRAY))
         }
-        super.appendTooltip(stack, world, tooltip, context)
+        super.appendTooltip(stack, context, tooltip, type)
     }
 }
